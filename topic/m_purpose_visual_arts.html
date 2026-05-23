@@ -1,13 +1,1763 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Purposes and Elements of Visual Arts</title>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <p>Lorem ipsum docet</p>
-        <section>
-            <a href="/">Back to Homepage</a>
-        </section>
-    </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Visual Arts — GE Elective 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════════════
+   BASE RESET
+══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ══════════════════════════════════════════════════
+   CSS VARIABLES
+══════════════════════════════════════════════════ */
+:root {
+  --bg:         #fdf1de;
+  --white:      #ffffff;
+  --off-white:  #faf7f2;
+  --navy:       #1e3a8a;
+  --cobalt:     #3b5bdb;
+  --blue-mid:   #4c6ef5;
+  --blue-light: #748ffc;
+  --blue-banner:#4263eb;
+  --text:       #1e3a8a;
+  --text-body:  #3d5a99;
+  --muted:      #6b84c4;
+  --border:     rgba(59,91,219,0.15);
+  --shadow:     0 4px 24px rgba(30,58,138,0.08);
+}
+
+/* ══════════════════════════════════════════════════
+   PAGE SYSTEM
+══════════════════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+html { scroll-behavior: smooth; }
+html.home-active { overflow-x: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+body.home-active { overflow-x: hidden; }
+/* ══════════════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(94,143,220,1); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--navy); }
+
+/* ══════════════════════════════════════════════════
+   MASTHEAD (shared across all pages)
+══════════════════════════════════════════════════ */
+.masthead {
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(94,143,220,1);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  box-shadow: 0 1px 0 var(--border);
+}
+.masthead-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.masthead-nav { display: flex; gap: 2.5rem; list-style: none; }
+.masthead-nav a {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.25s;
+  cursor: pointer;
+}
+.masthead-nav a:hover,
+.masthead-nav a.active { color: #1e3a8a; }
+.masthead-issue {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--white);
+}
+
+/* ══════════════════════════════════════════════════
+   GLOBAL BTN-BACK (fixed, shown on all pages except home)
+══════════════════════════════════════════════════ */
+.btn-back {
+  position: fixed;
+  top: 90px;
+  left: 24px;
+  z-index: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(2,54,167,0.699);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+  border: none;
+}
+.btn-back:hover {
+  background: var(--white);
+  color: var(--cobalt);
+  border: 1px solid #1e3a8a;
+}
+
+/* ══════════════════════════════════════════════════
+   HERO (home page hero layout)
+══════════════════════════════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 92vh;
+  border-bottom: 1px solid var(--border);
+}
+.hero-text {
+  padding: 5rem 4rem 5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  background: var(--white);
+}
+.hero-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 2rem;
+}
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 2rem;
+}
+.hero-title em { font-style: italic; color: var(--cobalt); }
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-body);
+  max-width: 38ch;
+  line-height: 1.9;
+  margin-bottom: 3rem;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--cobalt);
+  text-decoration: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  transition: gap 0.3s, background 0.3s;
+  align-self: flex-start;
+  cursor: pointer;
+  border: none;
+}
+.hero-cta:hover { background: var(--navy); gap: 1.5rem; }
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+.hero-artwork-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  animation: fadeInUp 1.2s ease-out both, float 6s ease-in-out infinite 1.2s;
+}
+.hero-artwork {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 32px;
+  box-shadow: 0 40px 80px rgba(30,58,138,0.18);
+  border: 6px solid var(--white);
+  transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.6s ease;
+  cursor: pointer;
+}
+.hero-artwork:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 60px 120px rgba(30,58,138,0.25);
+}
+
+/* ══════════════════════════════════════════════════
+   HOME — EDITORIAL HERO (index.html layout)
+══════════════════════════════════════════════════ */
+#page-home .editorial-hero {
+  width: 100vw;
+  height: calc(100vh - 62px);
+  display: flex;
+  overflow: hidden;
+}
+#page-home .col-left {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+#page-home .ed-title-block {
+  height: 45%;
+  padding: 1rem 1rem 1rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ed-accent {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1rem;
+}
+.ed-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+}
+.ed-title em { font-style: italic; color: var(--cobalt); font-weight: 400; }
+#page-home .ed-img-bottom {
+  flex: 1;
+  padding: 0.8rem 1.5rem 2rem 2.5rem;
+  overflow: hidden;
+}
+#page-home .ed-img-bottom .img-wrap,
+#page-home .ed-img-top .img-wrap {
+  width: 100%; height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#page-home .ed-img-bottom .img-wrap img,
+#page-home .ed-img-top .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+#page-home .col-right {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+#page-home .ed-img-top {
+  height: 42%;
+  padding: 2rem 3rem 0.8rem 1rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+#page-home .ed-body-block {
+  flex: 1;
+  padding: 1.5rem 4rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.ed-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.ed-subtitle em { font-style: italic; color: #5e8fdc; }
+.ed-subtitle strong { font-weight: 800; text-decoration: underline; text-underline-offset: 4px; color: #5e8fdc; }
+.ed-desc {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.85;
+  max-width: 44ch;
+  margin-bottom: 1.8rem;
+}
+#page-home .ed-body-block .hero-cta { background: rgba(94,143,220,1); }
+#page-home .ed-body-block .hero-cta:hover { background: #4a7abf; }
+.img-ph {
+  width: 100%; height: 100%;
+  border-radius: 10px;
+  background: rgba(59,91,219,0.05);
+  border: 2px dashed rgba(59,91,219,0.18);
+  display: flex; align-items: center; justify-content: center;
+}
+.img-ph span {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  color: rgba(59,91,219,0.28);
+  text-transform: uppercase; text-align: center; line-height: 2;
+}
+
+/* ══════════════════════════════════════════════════
+   PURPOSES & METHOD PAGES
+══════════════════════════════════════════════════ */
+.purposes-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+}
+.purposes-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  max-width: 800px;
+  margin-inline: auto;
+}
+.purposes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+.purpose-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 3px solid transparent;
+  --mx: -999px;
+  --my: -999px;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    radial-gradient(300px circle at var(--mx) var(--my),
+      rgba(94,143,220,1.0) 0%,
+      rgba(116,143,252,0.8) 25%,
+      rgba(174,196,255,0.4) 55%,
+      transparent 100%
+    ) border-box;
+}
+.purpose-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  transition: opacity 0.4s; z-index: 0;
+}
+#page-purposes .purpose-card:nth-child(1)::before { background-image: url('image/purp1.jpg'); }
+#page-purposes .purpose-card:nth-child(2)::before { background-image: url('image/purp2.jpg'); }
+#page-purposes .purpose-card:nth-child(3)::before { background-image: url('image/purp3.jpg'); }
+#page-purposes .purpose-card:nth-child(4)::before { background-image: url('image/color1.jpg'); }
+#page-purposes .purpose-card:nth-child(5)::before { background-image: url('image/texture1.jpg'); }
+.purpose-card:hover::before { opacity: 0.15; }
+.purpose-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(30,58,138,0.14); }
+.purpose-card > * { position: relative; z-index: 1; }
+.purpose-card .element-name { font-size: 1.5rem; margin-bottom: 1rem; color: var(--cobalt); font-weight: 700; }
+.purpose-card .element-desc { color: var(--text-body); }
+.purpose-card .element-number { color: var(--blue-light); }
+
+/* ══════════════════════════════════════════════════
+   SHARED ELEMENT CARD STYLES (Elements & Principles)
+══════════════════════════════════════════════════ */
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.section-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+.section-title em { font-style: italic; color: var(--cobalt); }
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  max-width: 55ch;
+  line-height: 1.85;
+}
+.el-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.el-card {
+  border: 3px solid transparent;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  --mx: -999px;
+  --my: -999px;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    radial-gradient(400px circle at var(--mx) var(--my),
+      rgba(94,143,220,1.0) 0%,
+      rgba(116,143,252,0.8) 25%,
+      rgba(174,196,255,0.4) 55%,
+      transparent 100%
+    ) border-box;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.el-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(30,58,138,0.13); }
+.card-visual { width: 100%; height: 320px; overflow: hidden; position: relative; }
+.card-slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+.card-slide.active { opacity: 1; }
+.card-dots {
+  position: absolute; bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 10;
+}
+.card-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(59,91,219,0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+.card-dot.active { background: rgba(59,91,219,0.85); transform: scale(1.35); }
+.card-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 80%, var(--white));
+  pointer-events: none; z-index: 5;
+}
+.card-body { padding: 1.5rem 1.8rem 1.8rem; }
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2;
+}
+.card-desc { font-size: 0.87rem; color: var(--text-body); line-height: 1.75; margin-bottom: 1.1rem; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.1rem; }
+.card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em;
+  padding: 4px 10px 4px 8px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 100px;
+  color: #ffffff;
+  background: rgba(56,98,212,0.603);
+  backdrop-filter: blur(10px);
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.card-tag:hover { background: rgba(174,196,255,0.6); border-color: rgba(255,255,255,0.8); }
+.card-tag svg { flex-shrink: 0; opacity: 0.9; stroke: #ffffff; }
+.card-footer { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--muted); }
+.card-footer span { color: var(--cobalt); }
+
+/* ══════════════════════════════════════════════════
+   SHARED SIDE PANEL (Elements & Principles use separate IDs but same styles)
+══════════════════════════════════════════════════ */
+.detail-panel {
+  position: fixed;
+  top: 0; right: -560px;
+  width: 520px; height: 100vh;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 40px rgba(30,58,138,0.1);
+  z-index: 500;
+  overflow-y: auto;
+  transition: right 0.38s cubic-bezier(0.22,1,0.36,1);
+  display: flex; flex-direction: column;
+}
+.detail-panel.open { right: 0; }
+.detail-panel::-webkit-scrollbar { width: 3px; }
+.detail-panel::-webkit-scrollbar-thumb { background: var(--border); }
+.panel-backdrop-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 499; pointer-events: none;
+  transition: background 0.38s;
+}
+.panel-backdrop-overlay.open { background: rgba(30,58,138,0.15); pointer-events: auto; }
+.panel-close {
+  position: absolute; top: 1rem; right: 1.2rem; z-index: 10;
+  background: white; border: none; cursor: pointer;
+  color: var(--cobalt); font-size: 1rem; line-height: 1;
+  padding: 8px 10px; border-radius: 50%;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(30,58,138,0.15);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.panel-close:hover { background: var(--cobalt); color: white; transform: scale(1.1); }
+.panel-image {
+  width: 100%; height: 380px;
+  flex-shrink: 0; overflow: hidden;
+  position: relative; background: var(--off-white);
+}
+.panel-slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill; opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+.panel-slide.active { opacity: 1; }
+.panel-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, var(--white));
+  pointer-events: none; z-index: 5;
+}
+.panel-image-glyph {
+  position: absolute; bottom: -1rem; right: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 9rem; font-weight: 700; font-style: italic;
+  color: rgba(59,91,219,0.07); line-height: 1;
+  pointer-events: none; z-index: 6;
+}
+.panel-content { padding: 2rem 2.5rem 3rem; flex: 1; }
+.panel-badges { display: flex; gap: 10px; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; }
+.panel-badge {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 4px 12px; border: 1px solid var(--border);
+  color: var(--cobalt); border-radius: 100px;
+}
+.panel-badge-module { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--muted); }
+.panel-title { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; line-height: 1.1; }
+.panel-title em { font-style: italic; color: var(--cobalt); }
+.panel-divider { width: 36px; height: 2px; background: var(--cobalt); margin: 1.2rem 0; border-radius: 2px; }
+.panel-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--text-body); line-height: 1.85; margin-bottom: 1.5rem; }
+.panel-overview-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cobalt); margin-bottom: 0.6rem; }
+.panel-overview { font-size: 0.9rem; color: var(--text-body); line-height: 1.9; margin-bottom: 2rem; }
+.panel-features-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cobalt); margin-bottom: 0.8rem; }
+.panel-features { display: flex; flex-direction: column; gap: 6px; }
+.panel-feature {
+  display: flex; gap: 1.1rem; align-items: flex-start;
+  padding: 1rem 1.2rem;
+  background: var(--off-white);
+  border-left: 2px solid transparent;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.25s, border-color 0.25s;
+}
+.panel-feature:hover { background: rgba(59,91,219,0.06); border-left-color: var(--cobalt); }
+.panel-feature-icon { font-size: 1.1rem; flex-shrink: 0; padding-top: 0.1rem; }
+.panel-feature-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.25rem; }
+.panel-feature-desc { font-size: 0.87rem; color: var(--text-body); line-height: 1.72; }
+
+/* ══════════════════════════════════════════════════
+   ELEMENTS PAGE SPECIFIC
+══════════════════════════════════════════════════ */
+.elements-page {
+  max-width: 1400px; margin: 0 auto;
+  padding: 5rem 3rem 8rem;
+}
+
+/* ══════════════════════════════════════════════════
+   PRINCIPLES PAGE SPECIFIC
+══════════════════════════════════════════════════ */
+.principles-page {
+  max-width: 1400px; margin: 0 auto;
+  padding: 5rem
+   3rem 8rem;
+}
+#page-method .purpose-card:nth-child(1)::before { background-image: url('image/study1.jpg'); }
+#page-method .purpose-card:nth-child(2)::before { background-image: url('image/study2.jpg'); }
+#page-method .purpose-card:nth-child(3)::before { background-image: url('image/study3.jpg'); }
+#page-method .purpose-card:nth-child(4)::before { background-image: url('image/study4.jpg'); }
+#page-method .purpose-card:nth-child(5)::before { background-image: url('image/study5.jpg'); }
+/* ══════════════════════════════════════════════════
+   ELEMENT NUMBER (purposes/method cards)
+══════════════════════════════════════════════════ */
+.element-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  color: var(--cobalt); margin-bottom: 1.5rem; display: block;
+}
+.element-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 1rem; line-height: 1.2;
+}
+.element-desc { font-size: 0.95rem; color: var(--text-body); line-height: 1.8; }
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════ */
+.simple-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 2rem 2.5rem;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 1.5rem;
+}
+.simple-footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+.simple-footer a:hover { color: var(--cobalt); }
+.footer-quote-section { text-align: center; max-width: 60ch; margin: 0.5rem auto; }
+.footer-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem,1.8vw,1.25rem);
+  font-style: italic; color: rgba(255,255,255,0.85); line-height: 1.5; margin-bottom: 0.5rem;
+}
+.footer-author { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); }
+.footer-divider { width: 100%; max-width: 1200px; border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
+.footer-bottom-row {
+  width: 100%; max-width: 1200px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1.5rem;
+  font-family: 'DM Mono', monospace; font-size: 11px;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic;
+  display: flex; align-items: center; gap: 8px; color: white !important;
+}
+.footer-logo svg { color: var(--cobalt); fill: none; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-copy { letter-spacing: 0.05em; opacity: 0.7;color: var(--white); }
+
+
+/* ══════════════════════════════════════════════════
+   SCROLL TO TOP (global)
+═════════════════════════════════════════════════ */
+.footer-scroll-top {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(59,91,219,0.9); color: white; border: none;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 15px rgba(59,91,219,0.3);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.4s, visibility 0.4s, transform 0.4s, background 0.3s;
+  z-index: 800;
+}
+.footer-scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.footer-scroll-top:hover { background: var(--navy); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(59,91,219,0.35); }
+
+/* ══════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .el-grid { grid-template-columns: repeat(2, 1fr); }
+  .detail-panel { width: 100vw; right: -100vw; }
+}
+@media (max-width: 768px) {
+  .footer-bottom-row { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; gap: 1.5rem; }
+  #page-home .editorial-hero { flex-direction: column; height: auto; overflow: auto; }
+  #page-home .col-left, #page-home .col-right { width: 100%; height: auto; }
+  #page-home .ed-img-top, #page-home .ed-img-bottom { height: 200px; }
+}
+@media (max-width: 580px) {
+  .el-grid { grid-template-columns: 1fr; }
+  .elements-page, .principles-page { padding: 3rem 1.5rem 6rem; }
+  .purposes-container { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     SHARED MASTHEAD
+══════════════════════════════════════════════════ -->
+<header class="masthead">
+  <a class="masthead-logo" onclick="showPage('home')" href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" class="logo-icon">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" fill="currentColor" opacity="0.15"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <circle cx="6.5" cy="11.5" r="1.2" fill="currentColor"/>
+      <circle cx="9"   cy="7.5"  r="1.2" fill="currentColor"/>
+      <circle cx="13"  cy="6"    r="1.2" fill="currentColor"/>
+      <circle cx="16.5" cy="8.5" r="1.2" fill="currentColor"/>
+      <line x1="19" y1="4" x2="14" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M14 9 c-1 1-1.5 2-1 2.8 .8.5 1.8 0 2.8-1z" fill="currentColor"/>
+    </svg>
+    Reading Visual Arts
+  </a>
+  <nav>
+    <ul class="masthead-nav">
+      <li><a data-page="purposes" onclick="showPage('purposes'); return false;" href="#">Purpose</a></li>
+      <li><a data-page="method"   onclick="showPage('method');   return false;" href="#">Study Art</a></li>
+      <li><a data-page="elements" onclick="showPage('elements'); return false;" href="#">Elements</a></li>
+      <li><a data-page="principles" onclick="showPage('principles'); return false;" href="#">Principle</a></li>
+    </ul>
+  </nav>
+  <span class="masthead-issue">A Visual Arts Primer</span>
+</header>
+
+<!-- Global back-to-home button (hidden on home page) -->
+<a class="btn-back" id="btn-back-global" onclick="showPage('home'); return false;" href="#" style="display:none;">← BACK TO HOME</a>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: HOME (index.html)
+══════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <section class="editorial-hero">
+    <div class="col-left">
+      <div class="ed-title-block">
+        <p class="ed-accent">GE ELEC 6 - Visual Arts</p>
+        <h1 class="ed-title">
+          <em>Don't just</em><br>
+          LOOK.<br>
+          READ THE<br>
+          ART.
+        </h1>
+      </div>
+      <div class="ed-img-bottom">
+        <div class="img-wrap">
+          <img src="image/web.jpg" alt="Art"
+            onerror="this.parentElement.outerHTML='<div class=img-ph><span>Image 1<br>(bottom left)</span></div>'">
+        </div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="ed-img-top">
+        <div class="img-wrap">
+          <img src="image/web2.jpg" alt="Art"
+            onerror="this.parentElement.outerHTML='<div class=img-ph><span>Image 2<br>(top right)</span></div>'">
+        </div>
+      </div>
+      <div class="ed-body-block">
+        <p class="ed-subtitle">
+          We Study <em>The Visual</em> world you've<br>
+          <strong>ALWAYS</strong> wanted to understand
+        </p>
+        <p class="ed-desc">
+          Visual arts are structured texts designed for deep communication. Step beyond surface appearances to isolate foundational components, evaluate the interpretive gap between creator intent and audience decoding, and trace how images actively shape culture, history, and identity.
+        </p>
+        <button class="hero-cta" onclick="showPage('purposes')">
+          EXPLORE VISUAL ARTS
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M1 5h18M14 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+    <footer class="simple-footer">
+      <div class="footer-quote-section">
+        <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+        <span class="footer-author">— Henry Ward Beecher</span>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom-row">
+        <div class="footer-left">
+          <a class="footer-logo" onclick="showPage('home'); return false;" href="#">Reading Visual Arts</a>
+        </div>
+        <div class="footer-links">
+          <a onclick="showPage('purposes'); return false;" href="#">Purpose</a>
+          <a onclick="showPage('elements'); return false;" href="#">Elements</a>
+          <a onclick="showPage('principles'); return false;" href="#">Principles</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 GE ELEC 6 &bull; Reading Visual Arts</div>
+      </div>
+    </footer>
+
+</div>  <!-- end page-home -->
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: PURPOSES (purposes.html)
+══════════════════════════════════════════════════ -->
+<div id="page-purposes" class="page">
+  <main class="purposes-container">
+    <div class="purposes-header">
+      <p class="hero-kicker">Core Intentions</p>
+      <h1 class="hero-title">Purposes of the <em>Visual</em> Arts</h1>
+    </div>
+    <div class="purposes-grid">
+      <div class="purpose-card">
+        <span class="element-number">01</span>
+        <h2 class="element-name">Communication of Ideas and Emotions</h2>
+        <p class="element-desc">Artists use visual art to express what is often difficult to put into words — personal feelings, opinions, and inner experiences. A painting or sculpture can convey sadness, joy, anger, or love just through color, shape, and form.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">02</span>
+        <h2 class="element-name">Cultural Representation</h2>
+        <p class="element-desc">Art reflects the time and place it was created in. It captures the beliefs, traditions, and values of a society, acting as a visual record of history and culture that future generations can look back on.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">03</span>
+        <h2 class="element-name">Education and Awareness</h2>
+        <p class="element-desc">Art has the power to teach. It can introduce viewers to new ideas, challenge existing beliefs, and make people think more deeply about the world around them — sometimes delivering a message more effectively than a textbook.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">04</span>
+        <h2 class="element-name">Aesthetic Enjoyment</h2>
+        <p class="element-desc">One of art's most natural purposes is simply to be appreciated. It stimulates the senses, sparks imagination, and gives people a sense of beauty and pleasure — encouraging creativity in both the artist and the viewer.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">05</span>
+        <h2 class="element-name">Social Critique and Change</h2>
+        <p class="element-desc">Art can be a form of protest or commentary. Artists often use their work to highlight injustice, inequality, or social problems, raising public awareness and even inspiring people to take action or change their thinking.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="simple-footer">
+    <div class="footer-quote-section">
+      <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+      <span class="footer-author">— Henry Ward Beecher</span>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom-row">
+      <div class="footer-left">
+        <a class="footer-logo" onclick="showPage('home'); return false;" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+          </svg>
+          Reading Visual Arts
+        </a>
+      </div>
+      <div class="footer-links">
+        <a onclick="showPage('home'); return false;" href="#">Home</a>
+        <a onclick="showPage('purposes'); return false;" href="#">Purpose</a>
+        <a onclick="showPage('elements'); return false;" href="#">Elements</a>
+        <a onclick="showPage('principles'); return false;" href="#">Principles</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GE ELEC 6 &bull; Reading Visual Arts</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: METHOD (method.html — Why Study Art?)
+══════════════════════════════════════════════════ -->
+<div id="page-method" class="page">
+  <main class="purposes-container method-page">
+    <div class="purposes-header">
+      <p class="hero-kicker">Why Study Art?</p>
+      <h1 class="hero-title">Why Do We Need to Study <em>Art</em>?</h1>
+    </div>
+    <div class="purposes-grid">
+      <div class="purpose-card">
+        <span class="element-number">01</span>
+        <h2 class="element-name">Critical Thinking and Visual Literacy</h2>
+        <p class="element-desc">Studying art trains the mind to look carefully, recognize patterns, and interpret visual messages. These skills help people make stronger observations and better understand the meaning behind images.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">02</span>
+        <h2 class="element-name">Cultural and Historical Awareness</h2>
+        <p class="element-desc">Art connects us to diverse histories, traditions, and worldviews. By studying creative work from different times and places, we gain empathy and a richer understanding of how societies evolve.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">03</span>
+        <h2 class="element-name">Creative Expression and Problem-Solving Skills</h2>
+        <p class="element-desc">Learning art encourages experimentation and original thinking. It helps people solve problems in new ways and communicate ideas through color, composition, and form.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">04</span>
+        <h2 class="element-name">Understanding Media and Communication</h2>
+        <p class="element-desc">Art study reveals how visual culture shapes our lives, from advertising to social media. It teaches us to read and respond to images critically in a world full of visual messages.</p>
+      </div>
+      <div class="purpose-card">
+        <span class="element-number">05</span>
+        <h2 class="element-name">Appreciation for Human Expression</h2>
+        <p class="element-desc">Studying art builds respect for creative voices across cultures. It shows how people express beliefs, hopes, and emotions through different artistic forms.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="simple-footer">
+    <div class="footer-quote-section">
+      <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+      <span class="footer-author">— Henry Ward Beecher</span>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom-row">
+      <div class="footer-left">
+        <a class="footer-logo" onclick="showPage('home'); return false;" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+          </svg>
+          Reading Visual Arts
+        </a>
+      </div>
+      <div class="footer-links">
+        <a onclick="showPage('home'); return false;" href="#">Home</a>
+        <a onclick="showPage('purposes'); return false;" href="#">Purpose</a>
+        <a onclick="showPage('elements'); return false;" href="#">Elements</a>
+        <a onclick="showPage('principles'); return false;" href="#">Principles</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GE ELEC 6 &bull; Reading Visual Arts</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: ELEMENTS (elements.html)
+══════════════════════════════════════════════════ -->
+<div id="page-elements" class="page">
+  <main class="elements-page">
+    <div class="section-header-row">
+      <div>
+        <p class="section-kicker"></p>
+        <h1 class="section-title">Elements of <em>Art</em></h1>
+        <p class="section-sub">The fundamental visual components every artist uses to construct meaning. Click any card to explore each element in depth.</p>
+      </div>
+    </div>
+    <div class="el-grid" id="elementsGrid">
+
+      <div class="el-card" data-element="line">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/line1.jpg" alt="Line 1">
+          <img class="card-slide" src="image/line2.jpg" alt="Line 2">
+          <img class="card-slide" src="image/line3.jpg" alt="Line 3">
+          <img class="card-slide" src="image/line4.jpg" alt="Line 4">
+          <img class="card-slide" src="image/line5.jpg" alt="Line 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Line</div>
+          <div class="card-desc">The foundational path of a moving point that directs the viewer's eye across a composition.</div>
+          <div class="card-tags">
+            <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>Direction</span>
+            <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12 C6 6,10 6,12 12 C14 18,18 18,21 12"/></svg>Path</span>
+            <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Boundary</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="shape">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/shapes1.jpg" alt="Shape 1">
+          <img class="card-slide" src="image/shapes2.jpg" alt="Shape 2">
+          <img class="card-slide" src="image/shapes3.jpg" alt="Shape 3">
+          <img class="card-slide" src="image/shapes4.jpg" alt="Shape 4">
+          <img class="card-slide" src="image/shapes5.jpg" alt="Shape 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Shape</div>
+          <div class="card-desc">Two-dimensional, flat areas created when a line closes or sets boundaries around a defined space.</div>
+          <div class="card-tags">
+            <span class="card-tag">2D</span>
+            <span class="card-tag">Flat</span>
+            <span class="card-tag">Area</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="form">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/form1.jpg" alt="Form 1">
+          <img class="card-slide" src="image/form2.jpg" alt="Form 2">
+          <img class="card-slide" src="image/form3.jpg" alt="Form 3">
+          <img class="card-slide" src="image/form4.jpg" alt="Form 4">
+          <img class="card-slide" src="image/form5.jpg" alt="Form 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Form</div>
+          <div class="card-desc">Three-dimensional objects that take up physical volume or create the illusion of depth.</div>
+          <div class="card-tags">
+            <span class="card-tag">3D</span>
+            <span class="card-tag">Volume</span>
+            <span class="card-tag">Depth</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="space">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/space1.jpg" alt="Space 1">
+          <img class="card-slide" src="image/space2.jpg" alt="Space 2">
+          <img class="card-slide" src="image/space3.jpg" alt="Space 3">
+          <img class="card-slide" src="image/space4.jpg" alt="Space 4">
+          <img class="card-slide" src="image/space5.jpg" alt="Space 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Space</div>
+          <div class="card-desc">The depth, open margins, or area surrounding and separating objects within a work.</div>
+          <div class="card-tags">
+            <span class="card-tag">Depth</span>
+            <span class="card-tag">Negative</span>
+            <span class="card-tag">Perspective</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="color">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/color1.jpg" alt="Color 1">
+          <img class="card-slide" src="image/color2.jpg" alt="Color 2">
+          <img class="card-slide" src="image/color3.jpg" alt="Color 3">
+          <img class="card-slide" src="image/color4.jpg" alt="Color 4">
+          <img class="card-slide" src="image/color5.jpg" alt="Color 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Color</div>
+          <div class="card-desc">Visual properties generated by light, defined through shifting hues, intensities, and values.</div>
+          <div class="card-tags">
+            <span class="card-tag">Hue</span>
+            <span class="card-tag">Intensity</span>
+            <span class="card-tag">Value</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="value">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/value1.jpg" alt="Value 1">
+          <img class="card-slide" src="image/value2.jpg" alt="Value 2">
+          <img class="card-slide" src="image/value3.jpg" alt="Value 3">
+          <img class="card-slide" src="image/value4.jpg" alt="Value 4">
+          <img class="card-slide" src="image/value5.jpg" alt="Value 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Value</div>
+          <div class="card-desc">The scale of lightness or darkness of a color, essential for creating contrast and mood.</div>
+          <div class="card-tags">
+            <span class="card-tag">Lightness</span>
+            <span class="card-tag">Darkness</span>
+            <span class="card-tag">Contrast</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="texture">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/texture1.jpg" alt="Texture 1">
+          <img class="card-slide" src="image/texture2.jpg" alt="Texture 2">
+          <img class="card-slide" src="image/texture3.jpg" alt="Texture 3">
+          <img class="card-slide" src="image/texture4.jpg" alt="Texture 4">
+          <img class="card-slide" src="image/texture5.jpg" alt="Texture 5">
+          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Texture</div>
+          <div class="card-desc">The perceived visual depth or actual surface tactile feel of a physical artwork.</div>
+          <div class="card-tags">
+            <span class="card-tag">Surface</span>
+            <span class="card-tag">Tactile</span>
+            <span class="card-tag">Visual Feel</span>
+          </div>
+          <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="simple-footer">
+    <div class="footer-quote-section">
+      <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+      <span class="footer-author">— Henry Ward Beecher</span>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom-row">
+      <div class="footer-left">
+        <a class="footer-logo" onclick="showPage('home'); return false;" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+          </svg>
+          Reading Visual Arts
+        </a>
+      </div>
+      <div class="footer-links">
+        <a onclick="showPage('home'); return false;" href="#">Home</a>
+        <a onclick="showPage('purposes'); return false;" href="#">Purpose</a>
+        <a onclick="showPage('elements'); return false;" href="#">Elements</a>
+        <a onclick="showPage('principles'); return false;" href="#">Principles</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GE ELEC 6 &bull; Reading Visual Arts</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: PRINCIPLES (principles.html — FIXED closePanel)
+══════════════════════════════════════════════════ -->
+<div id="page-principles" class="page">
+  <main class="principles-page">
+    <div class="section-header-row">
+      <div>
+        <p class="section-kicker">Principles of Art</p>
+        <h1 class="section-title">Principles of <em>Art</em></h1>
+        <p class="section-sub">Principles describe how elements are arranged:</p>
+      </div>
+    </div>
+    <div class="el-grid" id="principlesGrid">
+
+      <div class="el-card" data-element="balance">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/balance.jpg" alt="Balance illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Balance</div>
+          <div class="card-desc">Balance creates a sense of stability by distributing visual weight evenly or intentionally unevenly across a composition.</div>
+          <div class="card-tags"><span class="card-tag">Symmetry</span><span class="card-tag">Stability</span><span class="card-tag">Equilibrium</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="contrast">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/contrast.jpg" alt="Contrast illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Contrast</div>
+          <div class="card-desc">Contrast highlights differences between elements, making shapes, colors, and textures stand out for stronger visual impact.</div>
+          <div class="card-tags"><span class="card-tag">Difference</span><span class="card-tag">Tension</span><span class="card-tag">Focus</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="emphasis">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/emphasis.jpg" alt="Emphasis illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Emphasis</div>
+          <div class="card-desc">Emphasis directs attention to a focal point, making one part of the artwork stronger or more important than the rest.</div>
+          <div class="card-tags"><span class="card-tag">Focal Point</span><span class="card-tag">Dominance</span><span class="card-tag">Attention</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="movement">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/movement.jpg" alt="Movement illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Movement</div>
+          <div class="card-desc">Movement guides the viewer's eye through the artwork, creating the illusion of action or direction.</div>
+          <div class="card-tags"><span class="card-tag">Flow</span><span class="card-tag">Direction</span><span class="card-tag">Energy</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="rhythm">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/rhythm.jpg" alt="Rhythm illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Rhythm</div>
+          <div class="card-desc">Rhythm is created by repeating visual elements, producing a sense of organized movement and pattern.</div>
+          <div class="card-tags"><span class="card-tag">Repetition</span><span class="card-tag">Pattern</span><span class="card-tag">Tempo</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="unity">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/unity.jpg" alt="Unity illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Unity</div>
+          <div class="card-desc">Unity brings all parts of an artwork together so that it feels cohesive and visually complete.</div>
+          <div class="card-tags"><span class="card-tag">Cohesion</span><span class="card-tag">Consistency</span><span class="card-tag">Harmony</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="variety">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/variety.jpg" alt="Variety illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Variety</div>
+          <div class="card-desc">Variety uses different elements or styles to create visual interest and avoid monotony.</div>
+          <div class="card-tags"><span class="card-tag">Diversity</span><span class="card-tag">Interest</span><span class="card-tag">Contrast</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="proportion">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/proportion.jpg" alt="Proportion illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Proportion</div>
+          <div class="card-desc">Proportion compares the size relationships among parts of an artwork to produce a sense of scale.</div>
+          <div class="card-tags"><span class="card-tag">Scale</span><span class="card-tag">Ratio</span><span class="card-tag">Relative Size</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+      <div class="el-card" data-element="harmony">
+        <div class="card-visual">
+          <img class="card-slide active" src="image/harmony.jpg" alt="Harmony illustration">
+          <div class="card-visual-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Harmony</div>
+          <div class="card-desc">Harmony combines compatible elements to create a pleasing, unified visual effect.</div>
+          <div class="card-tags"><span class="card-tag">Agreement</span><span class="card-tag">Balance</span><span class="card-tag">Cohesion</span></div>
+          <div class="card-footer"><span>Definition</span> · Art Principle</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="simple-footer">
+    <div class="footer-quote-section">
+      <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+      <span class="footer-author">— Henry Ward Beecher</span>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom-row">
+      <div class="footer-left">
+        <a class="footer-logo" onclick="showPage('home'); return false;" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+          </svg>
+          Reading Visual Arts
+        </a>
+      </div>
+      <div class="footer-links">
+        <a onclick="showPage('home'); return false;" href="#">Home</a>
+        <a onclick="showPage('purposes'); return false;" href="#">Purpose</a>
+        <a onclick="showPage('elements'); return false;" href="#">Elements</a>
+        <a onclick="showPage('principles'); return false;" href="#">Principles</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GE ELEC 6 &bull; Reading Visual Arts</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ELEMENTS SIDE PANEL (fixed, outside pages)
+══════════════════════════════════════════════════ -->
+<div class="panel-backdrop-overlay" id="el-panel-backdrop"></div>
+<div class="detail-panel" id="el-detail-panel">
+  <button class="panel-close" id="elPanelClose" aria-label="Close panel">✕</button>
+  <div class="panel-image" id="elPanelImage">
+    <div class="panel-image-overlay"></div>
+    <div class="panel-image-glyph" id="elPanelGlyph"></div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-badges">
+      <span class="panel-badge">Element of Art</span>
+      <span class="panel-badge-module">GE ELEC 6 · Module</span>
+    </div>
+    <h2 class="panel-title" id="elPanelTitle"></h2>
+    <div class="panel-divider"></div>
+    <p class="panel-intro" id="elPanelIntro"></p>
+    <p class="panel-overview-label">Overview</p>
+    <p class="panel-overview" id="elPanelOverview"></p>
+    <p class="panel-features-label">Key Features</p>
+    <div class="panel-features" id="elPanelFeatures"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PRINCIPLES SIDE PANEL (fixed, outside pages)
+══════════════════════════════════════════════════ -->
+<div class="panel-backdrop-overlay" id="pr-panel-backdrop"></div>
+<div class="detail-panel" id="pr-detail-panel">
+  <button class="panel-close" id="prPanelClose" aria-label="Close panel">✕</button>
+  <div class="panel-image" id="prPanelImage">
+    <div class="panel-image-overlay"></div>
+    <div class="panel-image-glyph" id="prPanelGlyph"></div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-badges">
+      <span class="panel-badge">Art Principle</span>
+      <span class="panel-badge-module">GE ELEC 6 · Principle</span>
+    </div>
+    <h2 class="panel-title" id="prPanelTitle"></h2>
+    <div class="panel-divider"></div>
+    <p class="panel-intro" id="prPanelIntro"></p>
+    <p class="panel-overview-label">Overview</p>
+    <p class="panel-overview" id="prPanelOverview"></p>
+    <p class="panel-features-label">Key Features</p>
+    <div class="panel-features" id="prPanelFeatures"></div>
+  </div>
+</div>
+
+<!-- Global scroll-to-top -->
+<button class="footer-scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════ -->
+<script>
+/* ─── PAGE SWITCHER ─────────────────────────────────── */
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+
+  /* Home page needs overflow:hidden */
+  document.documentElement.classList.toggle('home-active', pageId === 'home');
+  document.body.classList.toggle('home-active', pageId === 'home');
+
+  /* Update active nav link */
+  document.querySelectorAll('.masthead-nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === pageId);
+  });
+
+  /* Show/hide back button */
+  document.getElementById('btn-back-global').style.display = pageId === 'home' ? 'none' : '';
+
+  /* Scroll to top */
+  window.scrollTo(0, 0);
+
+  /* Re-run reveal observer for newly visible page */
+  observeReveals();
+}
+
+/* ─── PURPOSE/METHOD CARD SPOTLIGHT ─────────────────── */
+function initCardSpotlight(selector) {
+  document.querySelectorAll(selector).forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mx', '-999px');
+      card.style.setProperty('--my', '-999px');
+    });
+  });
+}
+initCardSpotlight('.purpose-card');
+
+/* ─── EL-CARD SPOTLIGHT ─────────────────────────────── */
+document.querySelectorAll('.el-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--mx', '-999px');
+    card.style.setProperty('--my', '-999px');
+  });
+});
+
+/* ─── ELEMENTS SLIDESHOW ────────────────────────────── */
+const elState = {};
+document.querySelectorAll('#elementsGrid .el-card').forEach(c => {
+  elState[c.dataset.element] = { index: 0, timer: null };
+});
+
+function elGoTo(card, i, syncPanel) {
+  const k = card.dataset.element;
+  const slides = card.querySelectorAll('.card-slide');
+  const dots   = card.querySelectorAll('.card-dot');
+  const n = ((i % slides.length) + slides.length) % slides.length;
+  slides.forEach((s, j) => s.classList.toggle('active', j === n));
+  dots.forEach((d, j)   => d.classList.toggle('active', j === n));
+  elState[k].index = n;
+  if (syncPanel && elOpenKey === k) elUpdatePanelSlide(n);
+}
+function elStartSS(card) {
+  const k = card.dataset.element;
+  elStopSS(card);
+  elState[k].timer = setInterval(() => elGoTo(card, elState[k].index + 1, true), 2000);
+}
+function elStopSS(card) {
+  const k = card.dataset.element;
+  if (elState[k].timer) { clearInterval(elState[k].timer); elState[k].timer = null; }
+}
+document.querySelectorAll('#elementsGrid .el-card').forEach(card => elStartSS(card));
+
+/* ─── ELEMENTS PANEL DATA ───────────────────────────── */
+const ELEMENTS_DATA = {
+  line: {
+    glyph: 'L',
+    title: '<em>Line</em> Analysis',
+    intro: 'The foundational path of a moving point across a medium, acting as the primary building block for establishing direction and structure.',
+    overview: "Line is the most basic element of art. It can vary in width, direction, curvature, and length. In visual analysis, lines do not just outline shapes; they guide the viewer's eye through the composition and convey distinct emotional and psychological characteristics based on their orientation and rhythm.",
+    features: [
+      { icon:'📐', title:'Structural Type',  desc:'Can be geometric (straight, rigid, mathematical) or organic (fluid, free-form, hand-drawn) to define boundaries.' },
+      { icon:'🧭', title:'Visual Direction', desc:'Horizontal lines evoke calm and stability; vertical lines express height and strength; diagonal lines imply kinetic movement.' },
+      { icon:'👁️', title:'Implied Lines',    desc:"Not physically drawn lines, but directional paths created by a figure's gaze, pointing gestures, or alignment of shapes." }
+    ]
+  },
+  shape: {
+    glyph: 'S',
+    title: '<em>Shape</em> Analysis',
+    intro: 'A two-dimensional, flat bounded area created when lines close or change direction to separate negative and positive space.',
+    overview: 'Shapes are strictly two-dimensional and are defined by clear edges or color contrasts. In visual media, layouts are structurally governed by how shapes are grouped, forming the basic visual grammar before depth or textures are introduced.',
+    features: [
+      { icon:'📐', title:'Geometric Shapes', desc:'Mathematical, precise forms such as circles, squares, and triangles that suggest order, artificial structures, or stability.' },
+      { icon:'🍃', title:'Organic Shapes',   desc:'Irregular, fluid, or biomorphic shapes mimicking natural forms like leaves, clouds, and living silhouettes.' },
+      { icon:'🌓', title:'Space Definition', desc:'Shapes explicitly create positive space (the subject area) and shape the surrounding boundaries of negative space.' }
+    ]
+  },
+  form: {
+    glyph: 'F',
+    title: '<em>Form</em> Analysis',
+    intro: 'Three-dimensional objects that possess actual volume or strategically employ shading to create the structural illusion of depth.',
+    overview: 'Form extends shape into the third dimension by incorporating depth. While three-dimensional arts physically occupy space, two-dimensional media must rely heavily on illusionistic modeling to transform flat shapes into volumetric presence.',
+    features: [
+      { icon:'🧱', title:'Actual Form',    desc:'Physical, tactile, and touchable three-dimensional objects occupying space, such as sculpture, architecture, and installations.' },
+      { icon:'🖼️', title:'Implied Form',   desc:'The graphic illusion of 3D depth rendered realistically onto a completely flat 2D surface.' },
+      { icon:'💡', title:'Light & Shadow', desc:'The primary rendering tool that reveals form, utilizing highlights, mid-tones, core shadows, and cast shadows.' }
+    ]
+  },
+  space: {
+    glyph: 'Sp',
+    title: '<em>Space</em> Analysis',
+    intro: 'The physical or implied area around, between, and within elements, dictating perspective, depth, and layout density.',
+    overview: 'Space manages the relational distance between elements in a work. It keeps a layout readable and balanced. Artists manipulate space mathematically or atmospherically to stretch a flat image into a vast, deep world.',
+    features: [
+      { icon:'🌌', title:'Positive & Negative',      desc:'Positive space is the active area occupied by the main subject; negative space is the empty, background area surrounding it.' },
+      { icon:'📏', title:'Linear Perspective',       desc:'A mathematical system using converging lines meeting at a vanishing point on the horizon line to construct infinite depth.' },
+      { icon:'🌫️', title:'Atmospheric Perspective',  desc:'Creating depth by making distant objects appear lighter, lower in contrast, and shifting toward cooler blue tones.' }
+    ]
+  },
+  color: {
+    glyph: 'C',
+    title: '<em>Color</em> Analysis',
+    intro: 'The visual property produced when light strikes an object and reflects back to the eye, carrying immense emotional weight.',
+    overview: 'Color is the most expressive and psychologically impactful element of art. It alters visual temperature and focus immediately. By combining different colors, creators establish harmony or intentional visual discordance within an artwork.',
+    features: [
+      { icon:'🎨', title:'Hue Identity',         desc:'The pure name of a color family corresponding directly to its position on the standard color wheel (e.g., Red, Blue).' },
+      { icon:'⚡', title:'Intensity / Saturation', desc:'The purity, brightness, or dullness of a color; highly intense colors pop forward, while dull tones recede.' },
+      { icon:'🌡️', title:'Color Temperature',    desc:'The division of the palette into warm tones (reds, yellows) that energize, and cool tones (blues, greens) that calm.' }
+    ]
+  },
+  value: {
+    glyph: 'V',
+    title: '<em>Value</em> Analysis',
+    intro: 'The relative scale of lightness or darkness of a color or tone independent of its pure hue.',
+    overview: 'Value is responsible for how we perceive light sources and structural weight. By placing extreme light values next to dark values, the artist establishes strong contrast, guides composition focus, and sets a dramatic or somber tone.',
+    features: [
+      { icon:'🌓', title:'Tonal Gradient',     desc:'The smooth, progressive transition steps spanning from absolute pure white down to solid dark black.' },
+      { icon:'💥', title:'Contrast Range',     desc:'High-contrast layouts produce dramatic, punchy impact, whereas low-contrast setups feel soft, hazy, or muted.' },
+      { icon:'🎭', title:'Chiaroscuro System', desc:'The specific allocation of stark light and dark values to model shapes into round, convincing three-dimensional forms.' }
+    ]
+  },
+  texture: {
+    glyph: 'T',
+    title: '<em>Texture</em> Analysis',
+    intro: 'The actual physical surface touch or the implied visual rendering of how an object feels.',
+    overview: 'Texture stimulates our sense of touch through sight. It adds a sensory layer to compositions, keeping clean digital or flat canvas layouts from looking sterile by simulating real-world materials and physical presence.',
+    features: [
+      { icon:'🖐️', title:'Actual / Tactile Texture', desc:'Surface qualities you can physically touch and feel, such as thick impasto oil paint ridges, coarse burlap, or smooth marble.' },
+      { icon:'👁️', title:'Implied / Visual Texture', desc:'An optical illusion where rendering tricks the eyes into seeing a texture (e.g., fur, metal, wood grain) on a smooth surface.' },
+      { icon:'🛠️', title:'Material Extraction',      desc:'How chosen mediums interact with tools (e.g., palette knives, chiseled stone, canvas paper fiber) to influence surface detail.' }
+    ]
+  }
+};
+
+/* ─── ELEMENTS PANEL LOGIC ──────────────────────────── */
+const elPanel    = document.getElementById('el-detail-panel');
+const elBackdrop = document.getElementById('el-panel-backdrop');
+let elOpenKey = null, elActiveCard = null;
+
+function elUpdatePanelSlide(i) {
+  elPanel.querySelectorAll('.panel-slide').forEach((s, j) => s.classList.toggle('active', j === i));
+}
+
+function elOpenPanel(card) {
+  const k = card.dataset.element;
+  const d = ELEMENTS_DATA[k];
+  if (!d) return;
+  if (elActiveCard && elActiveCard !== card) elStopSS(elActiveCard);
+  elActiveCard = card; elOpenKey = k;
+
+  const pImg = document.getElementById('elPanelImage');
+  const ov   = pImg.querySelector('.panel-image-overlay');
+  pImg.querySelectorAll('.panel-slide').forEach(s => s.remove());
+  const ci = elState[k]?.index ?? 0;
+  card.querySelectorAll('.card-slide').forEach((s, i) => {
+    const img = document.createElement('img');
+    img.className = 'panel-slide' + (i === ci ? ' active' : '');
+    img.src = s.src; img.alt = s.alt;
+    pImg.insertBefore(img, ov);
+  });
+
+  document.getElementById('elPanelGlyph').textContent    = d.glyph;
+  document.getElementById('elPanelTitle').innerHTML      = d.title;
+  document.getElementById('elPanelIntro').textContent    = d.intro;
+  document.getElementById('elPanelOverview').textContent = d.overview;
+  document.getElementById('elPanelFeatures').innerHTML   = d.features.map(f =>
+    `<div class="panel-feature"><span class="panel-feature-icon">${f.icon}</span><div><div class="panel-feature-title">${f.title}</div><div class="panel-feature-desc">${f.desc}</div></div></div>`
+  ).join('');
+
+  elPanel.classList.add('open');
+  elBackdrop.classList.add('open');
+  elStartSS(card);
+}
+
+function elClosePanel() {
+  elPanel.classList.remove('open');
+  elBackdrop.classList.remove('open');
+  if (elActiveCard) elStopSS(elActiveCard);
+  elOpenKey = null; elActiveCard = null;
+}
+
+document.querySelectorAll('#elementsGrid .el-card').forEach(c => c.addEventListener('click', () => elOpenPanel(c)));
+elBackdrop.addEventListener('click', elClosePanel);
+document.getElementById('elPanelClose').addEventListener('click', elClosePanel);
+
+/* ─── PRINCIPLES PANEL DATA ─────────────────────────── */
+const PRINCIPLES_DATA = {
+  balance: {
+    glyph: 'B',
+    title: '<em>Balance</em> Principle',
+    intro: 'Balance creates visual stability by controlling the distribution of weight across a composition.',
+    overview: 'Balance can be symmetrical, asymmetrical, or radial. It helps viewers feel that the artwork is intentionally arranged rather than chaotic, and it can make compositions feel calm, dynamic, or centered depending on the approach.',
+    features: [
+      { icon:'⚖️', title:'Symmetrical',  desc:'Elements are mirrored on either side of an axis to create formal stability.' },
+      { icon:'🔄', title:'Asymmetrical', desc:'Different visual weights are balanced through contrast, scale, and placement without mirroring.' },
+      { icon:'⭕', title:'Radial',       desc:'Elements radiate from a central point to unify the composition around a central focus.' }
+    ]
+  },
+  contrast: {
+    glyph: 'C',
+    title: '<em>Contrast</em> Principle',
+    intro: 'Contrast draws attention by placing opposing elements next to each other.',
+    overview: 'Contrast can be created with light and dark, large and small, rough and smooth, or warm and cool. It makes important parts of the composition stand out and keeps the viewer engaged by preventing visual monotony.',
+    features: [
+      { icon:'🌓', title:'Value Contrast',    desc:'Using light and dark tones to make key elements pop.' },
+      { icon:'🎨', title:'Color Contrast',    desc:'Pairing different hues or saturations to highlight separation and interest.' },
+      { icon:'🧩', title:'Textural Contrast', desc:'Mixing smooth and rough surfaces to create tactile variety.' }
+    ]
+  },
+  emphasis: {
+    glyph: 'E',
+    title: '<em>Emphasis</em> Principle',
+    intro: 'Emphasis creates a focal point so the viewer knows where to look first.',
+    overview: 'By using scale, color, placement, or contrast, emphasis makes one area of the artwork appear most important. It helps communicate the main idea or message clearly within the composition.',
+    features: [
+      { icon:'🎯', title:'Focal Point', desc:'The strongest visual element that immediately draws the eye.' },
+      { icon:'📌', title:'Dominance',   desc:'One element stands out as primary while others remain supportive.' },
+      { icon:'✨', title:'Isolation',   desc:'Separating an element from its surroundings to make it more noticeable.' }
+    ]
+  },
+  movement: {
+    glyph: 'M',
+    title: '<em>Movement</em> Principle',
+    intro: "Movement leads the viewer's eye through the composition along a visual path.",
+    overview: 'Movement can be suggested by lines, shapes, repetition, or directional cues. It gives the artwork liveliness and helps the viewer experience the piece in a controlled sequence.',
+    features: [
+      { icon:'🧭', title:'Directional Lines', desc:'Paths guided by lines, edges, or shapes that point the eye toward a destination.' },
+      { icon:'💨', title:'Rhythmic Flow',     desc:'Repeating elements that create a sense of motion across the surface.' },
+      { icon:'⏩', title:'Implied Action',    desc:'Static forms arranged to suggest movement or progression.' }
+    ]
+  },
+  rhythm: {
+    glyph: 'R',
+    title: '<em>Rhythm</em> Principle',
+    intro: 'Rhythm uses repeated elements to generate a sense of organized motion.',
+    overview: 'When shapes, colors, or textures repeat at regular or varied intervals, rhythm gives the composition momentum and familiarity. It can feel gentle, driving, or unpredictable depending on the pattern.',
+    features: [
+      { icon:'🎼', title:'Regular Rhythm',     desc:'Evenly spaced repetitions that create a steady, predictable flow.' },
+      { icon:'🧵', title:'Alternating Rhythm', desc:'Different elements repeat in a fixed variation to keep things lively.' },
+      { icon:'🌊', title:'Progressive Rhythm', desc:'Repetitions that change gradually, leading the eye along a visual gradient.' }
+    ]
+  },
+  unity: {
+    glyph: 'U',
+    title: '<em>Unity</em> Principle',
+    intro: 'Unity makes all parts of an artwork feel connected and complete.',
+    overview: 'Unity is achieved when the elements and principles work together harmoniously. It prevents the artwork from feeling fragmented and helps the viewer understand the composition as a cohesive whole.',
+    features: [
+      { icon:'🧩', title:'Visual Consistency', desc:'Colors, shapes, or textures repeat in a way that ties the design together.' },
+      { icon:'🤝', title:'Thematic Unity',     desc:'A shared idea or mood that runs through every part of the artwork.' },
+      { icon:'🔗', title:'Spatial Harmony',    desc:'Balanced relationships between elements that keep the whole composition stable.' }
+    ]
+  },
+  variety: {
+    glyph: 'V',
+    title: '<em>Variety</em> Principle',
+    intro: 'Variety introduces differences to make the artwork visually interesting.',
+    overview: 'Variety prevents boredom by combining diverse forms, colors, textures, and ideas. It adds vitality and helps the viewer explore different parts of the composition.',
+    features: [
+      { icon:'🎨', title:'Diverse Elements',    desc:'Mixing different shapes, colors, and textures for interest.' },
+      { icon:'⚡', title:'Unexpected Pairings', desc:'Combining unlike elements to create visual surprise.' },
+      { icon:'🌀', title:'Contrast within Unity', desc:'Using variety while still keeping the piece coherent.' }
+    ]
+  },
+  proportion: {
+    glyph: 'P',
+    title: '<em>Proportion</em> Principle',
+    intro: 'Proportion compares the relative size of elements to establish scale and relationships.',
+    overview: 'Proper proportion makes objects feel correctly sized and connected. It can create realism, exaggeration, or emphasis depending on whether the relationships are natural or intentionally distorted.',
+    features: [
+      { icon:'📏', title:'Human Scale',    desc:'Using familiar size relationships to keep figures and objects believable.' },
+      { icon:'🔍', title:'Relative Size',  desc:'Changing sizes to show importance or depth.' },
+      { icon:'📐', title:'Balanced Ratios', desc:'Keeping proportions harmonious by comparing each part to the whole.' }
+    ]
+  },
+  harmony: {
+    glyph: 'H',
+    title: '<em>Harmony</em> Principle',
+    intro: 'Harmony blends compatible elements to create a pleasing visual whole.',
+    overview: 'Harmony is achieved when the artwork feels smooth and easy to read. It often uses similar colors, repeated shapes, or unified textures so that the composition feels calm and balanced.',
+    features: [
+      { icon:'🎵', title:'Color Harmony',       desc:'Using colors that work well together to create a peaceful mood.' },
+      { icon:'✨', title:'Formal Harmony',       desc:'Repeating shapes or patterns in a balanced way.' },
+      { icon:'🧘', title:'Compositional Ease',  desc:'Arranging elements so the eye moves naturally and comfortably.' }
+    ]
+  }
+};
+
+/* ─── PRINCIPLES PANEL LOGIC (FIXED closePanel) ─────── */
+const prPanel    = document.getElementById('pr-detail-panel');
+const prBackdrop = document.getElementById('pr-panel-backdrop');
+
+function prOpenPanel(card) {
+  const k = card.dataset.element;
+  const d = PRINCIPLES_DATA[k];
+  if (!d) return;
+
+  const pImg = document.getElementById('prPanelImage');
+  const ov   = pImg.querySelector('.panel-image-overlay');
+  pImg.querySelectorAll('.panel-slide').forEach(s => s.remove());
+
+  const img = document.createElement('img');
+  img.className = 'panel-slide active';
+  img.src = card.querySelector('.card-slide').src;
+  img.alt = card.querySelector('.card-slide').alt;
+  pImg.insertBefore(img, ov);
+
+  document.getElementById('prPanelGlyph').textContent    = d.glyph;
+  document.getElementById('prPanelTitle').innerHTML      = d.title;
+  document.getElementById('prPanelIntro').textContent    = d.intro;
+  document.getElementById('prPanelOverview').textContent = d.overview;
+  document.getElementById('prPanelFeatures').innerHTML   = d.features.map(f =>
+    `<div class="panel-feature"><span class="panel-feature-icon">${f.icon}</span><div><div class="panel-feature-title">${f.title}</div><div class="panel-feature-desc">${f.desc}</div></div></div>`
+  ).join('');
+
+  prPanel.classList.add('open');
+  prBackdrop.classList.add('open');
+}
+
+/* ✅ FIXED: closePanel was broken in principles.html — now correct */
+function prClosePanel() {
+  prPanel.classList.remove('open');
+  prBackdrop.classList.remove('open');
+}
+
+document.querySelectorAll('#principlesGrid .el-card').forEach(c => c.addEventListener('click', () => prOpenPanel(c)));
+prBackdrop.addEventListener('click', prClosePanel);
+document.getElementById('prPanelClose').addEventListener('click', prClosePanel);
+
+/* ─── CLOSE PANELS ON ESC ───────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { elClosePanel(); prClosePanel(); }
+});
+
+/* ─── SCROLL REVEAL ─────────────────────────────────── */
+function observeReveals() {
+  const reveals = document.querySelectorAll('.reveal:not(.visible)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+}
+observeReveals();
+
+/* ─── SCROLL TO TOP ─────────────────────────────────── */
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 300);
+});
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ─── INIT HOME STATE ───────────────────────────────── */
+document.documentElement.classList.add('home-active');
+document.body.classList.add('home-active');
+</script>
+</body>
 </html>

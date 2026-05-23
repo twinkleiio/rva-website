@@ -224,7 +224,6 @@
     opacity: 0.2;
   }
 
-  /* ── SCROLLING BANNER ── */
   .ticker-band {
     background: var(--blue-banner);
     padding: 14px 0;
@@ -254,14 +253,12 @@
     to   { transform: translateX(-50%); }
   }
 
-  /* ── INTRO ── */
   .intro-band {
     background: var(--white);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
-  /* ── TERMS ── */
   .terms-band { background: var(--bg); }
 
   .terms-grid {
@@ -301,7 +298,6 @@
     line-height: 1.7;
   }
 
-  /* ── CINEMA ── */
   .cinema-band {
     background: var(--white);
     position: relative;
@@ -387,7 +383,6 @@
     background: rgba(59,91,219,0.05);
   }
 
-  /* ── ANALYSIS ── */
   .analysis-band {
     background: var(--bg);
     border-top: 1px solid var(--border);
@@ -425,7 +420,6 @@
 
   .element-desc { font-size: 16px; color: var(--text-body); line-height: 1.7; }
 
-  /* ── LEVELS ── */
   .levels-list {
     margin-top: 40px;
     display: flex;
@@ -468,7 +462,6 @@
 
   .level-desc { font-size: 16px; color: var(--text-body); line-height: 1.7; }
 
-  /* ── APPROACHES ── */
   .approaches-band { background: var(--bg); }
 
   .approaches-grid {
@@ -533,7 +526,6 @@
     border-radius: 0 8px 8px 0;
   }
 
-  /* ── 3 ACT ── */
   .acts-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -577,7 +569,6 @@
 
   .act-desc { font-size: 16px; color: var(--text-body); line-height: 1.7; }
 
-  /* ── PULLQUOTE ── */
   .argument-band {
     background: var(--navy);
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -617,7 +608,6 @@
     text-align: center;
   }
 
-  /* ── CONCLUSION ── */
   .conclusion-band { background: var(--white); }
 
   .conclusion-points {
@@ -649,7 +639,6 @@
 
   .c-text { font-size: 18px; color: var(--text-body); line-height: 1.7; }
 
-  /* ── NAV ── */
   nav {
     position: fixed;
     top: 36px; left: 0; right: 0;
@@ -684,6 +673,7 @@
   }
   .nav-links a:hover { color: var(--cobalt); }
 
+  /* ✅ FIXED: homepage link now points to m_purpose_visual_arts.html */
   .btn-home {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
@@ -698,7 +688,6 @@
   }
   .btn-home:hover { background: var(--navy); }
 
-  /* ── FOOTER ── */
   .footer {
     background: var(--navy);
     padding: 60px 40px;
@@ -721,7 +710,6 @@
     line-height: 2;
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 800px) {
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-right { height: 300px; }
@@ -758,7 +746,8 @@
     <li><a href="#analysis">Analysis</a></li>
     <li><a href="#criticism">Criticism</a></li>
   </ul>
-  <a href="/" class="btn-home">← Homepage</a>
+  <!-- ✅ FIXED: points to m_purpose_visual_arts.html instead of / -->
+  <a href="m_purpose_visual_arts.html" class="btn-home">← Homepage</a>
 </nav>
 
 <main>
