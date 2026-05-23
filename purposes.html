@@ -9,17 +9,32 @@
 </head>
 <body>
 
+<a href="index.html" class="btn-back">← BACK TO HOME</a>
 <header class="masthead">
-  <span class="masthead-logo">Reading Visual Arts</span>
-  <nav>
-    <ul class="masthead-nav">
-      <li><a href="purposes.html" style="color: var(--gold);">purpose</a></li>
-      <li><a href="index.html#method">Study Art</a></li>
-      <li><a href="index.html#elements">Elements</a></li>
-      <li><a href="index.html#principles">Principle</a></li>
-      <li><a href="index.html#film">film</a></li>
-    </ul>
-  </nav>
+<a href="index.html" style="text-decoration: none;">
+  <span class="masthead-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" class="logo-icon">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" fill="currentColor" opacity="0.15"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <circle cx="6.5" cy="11.5" r="1.2" fill="currentColor"/>
+      <circle cx="9"   cy="7.5"  r="1.2" fill="currentColor"/>
+      <circle cx="13"  cy="6"    r="1.2" fill="currentColor"/>
+      <circle cx="16.5" cy="8.5" r="1.2" fill="currentColor"/>
+      <line x1="19" y1="4" x2="14" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M14 9 c-1 1-1.5 2-1 2.8 .8.5 1.8 0 2.8-1z" fill="currentColor"/>
+    </svg>
+    Reading Visual Arts
+  </span>
+</a>
+<nav>
+  <ul class="masthead-nav">
+    <li><a href="purposes.html" class="active">Purpose</a></li>
+    <li><a href="method.html">Study Art</a></li>
+    <li><a href="elements.html">Elements</a></li>
+    <li><a href="principles.html">Principle</a></li>
+    <li><a href="film.html">Film</a></li>
+  </ul>
+</nav>
   <span class="masthead-issue">A Visual Arts Primer</span>
 </header>
 
@@ -61,10 +76,19 @@
     </div>
   </div>
   
-  <div style="padding: 4rem; text-align: center;">
-    <a href="index.html" class="hero-cta">Back to Home</a>
-  </div>
 </main>
-
+<script>
+  document.querySelectorAll('.purpose-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mx', '-999px');
+      card.style.setProperty('--my', '-999px');
+    });
+  });
+</script>
 </body>
 </html>

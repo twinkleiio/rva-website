@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elements of Art — Reading Visual Arts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── ELEMENTS PAGE — extra styles on top of style.css ── */
+
+.elements-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 3rem 8rem;
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.section-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.section-title em { font-style: italic; color: var(--cobalt); }
+
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  max-width: 55ch;
+  line-height: 1.85;
+}
+
+.view-all-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+.view-all-link:hover { color: var(--cobalt); border-bottom-color: var(--cobalt); }
+
+/* ── CARD GRID ── */
+.el-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.el-card {
+  border: 3px solid transparent;      /* ← thicker border */
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  --mx: -999px;
+  --my: -999px;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    radial-gradient(
+      400px circle at var(--mx) var(--my),   /* ← wider spread */
+      rgba(94,143,220,1.0)  0%,              /* ← header blue */
+      rgba(116,143,252,0.8) 25%,
+      rgba(174,196,255,0.4) 55%,
+      transparent 100%
+    ) border-box;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.el-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(30,58,138,0.13);
+}
+
+.card-visual {
+  width: 100%;
+  height: 320px;        /* fixed height */
+  overflow: hidden;
+  position: relative;
+}
+
+.card-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;     /* ← stretches to fill, no crop, no bg gap */
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+
+.card-slide.active { opacity: 1; }
+.card-dots {
+  position: absolute;
+  bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 10;
+}
+.card-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(59,91,219,0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+.card-dot.active {
+  background: rgba(59,91,219,0.85);
+  transform: scale(1.35);
+}
+.card-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 80%, var(--white)); /* ← was 55%, push it to 80% */
+  pointer-events: none; z-index: 5;
+}
+
+/* ── CARD BODY ── */
+.card-body { padding: 1.5rem 1.8rem 1.8rem; }
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-size: 0.87rem;
+  color: var(--text-body);
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
+}
+
+.card-tags {
+  display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.1rem;
+}
+.card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  color: #ffffff;
+  background: rgba(56, 98, 212, 0.603);       /* ← softer, icier blue */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.card-tag:hover {
+  background: rgba(174, 196, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.card-tag svg {
+  flex-shrink: 0;
+  opacity: 0.9;
+  stroke: #ffffff;
+}
+.card-footer {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.card-footer span { color: var(--cobalt); }
+
+/* ── SIDE PANEL ── */
+#detail-panel {
+  position: fixed;
+  top: 0; right: -560px;
+  width: 520px; height: 100vh;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 40px rgba(30,58,138,0.1);
+  z-index: 500;
+  overflow-y: auto;
+  transition: right 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex; flex-direction: column;
+}
+#detail-panel.open { right: 0; }
+#detail-panel::-webkit-scrollbar { width: 3px; }
+#detail-panel::-webkit-scrollbar-thumb { background: var(--border); }
+
+.panel-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  z-index: 10;
+  background: white;           /* ← white circle background */
+  border: none;
+  cursor: pointer;
+  color: var(--cobalt);        /* ← blue X icon */
+  font-size: 1rem;
+  line-height: 1;
+  padding: 8px 10px;           /* ← creates the round shape */
+  border-radius: 50%;          /* ← makes it a circle */
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(30,58,138,0.15);  /* ← subtle blue shadow */
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.panel-close:hover {
+  background: var(--cobalt);   /* ← flips on hover: blue bg */
+  color: white;                /* ← white X on hover */
+  transform: scale(1.1);
+}
+.panel-image {
+  width: 100%;
+  height: 380px;        /* ← increase from 240px to 380px */
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--off-white);
+}
+.panel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;     /* ← no crop, no gap */
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+.panel-slide.active { opacity: 1; }
+.panel-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 45%, var(--white));
+  pointer-events: none; z-index: 5;
+}
+.panel-image-glyph {
+  position: absolute; bottom: -1rem; right: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 9rem; font-weight: 700; font-style: italic;
+  color: rgba(59,91,219,0.07); line-height: 1;
+  pointer-events: none; z-index: 6;
+}
+
+.panel-content { padding: 2rem 2.5rem 3rem; flex: 1; }
+
+.panel-badges { display: flex; gap: 10px; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; }
+.panel-badge {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 4px 12px; border: 1px solid var(--border);
+  color: var(--cobalt); border-radius: 100px;
+}
+.panel-badge-module {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; color: var(--muted);
+}
+.panel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.1rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 0.4rem; line-height: 1.1;
+}
+.panel-title em { font-style: italic; color: var(--cobalt); }
+.panel-divider { width: 36px; height: 2px; background: var(--cobalt); margin: 1.2rem 0; border-radius: 2px; }
+.panel-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: var(--text-body); line-height: 1.85; margin-bottom: 1.5rem;
+}
+.panel-overview-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--cobalt); margin-bottom: 0.6rem;
+}
+.panel-overview {
+  font-size: 0.9rem; color: var(--text-body);
+  line-height: 1.9; margin-bottom: 2rem;
+}
+.panel-features-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--cobalt); margin-bottom: 0.8rem;
+}
+.panel-features { display: flex; flex-direction: column; gap: 6px; }
+.panel-feature {
+  display: flex; gap: 1.1rem; align-items: flex-start;
+  padding: 1rem 1.2rem;
+  background: var(--off-white);
+  border-left: 2px solid transparent;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.25s, border-color 0.25s;
+}
+.panel-feature:hover {
+  background: rgba(59,91,219,0.06);
+  border-left-color: var(--cobalt);
+}
+.panel-feature-icon { font-size: 1.1rem; flex-shrink: 0; padding-top: 0.1rem; }
+.panel-feature-title {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: 0.25rem;
+}
+.panel-feature-desc {
+  font-size: 0.87rem; color: var(--text-body); line-height: 1.72;
+}
+
+/* Backdrop */
+#panel-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 499; pointer-events: none;
+  transition: background 0.38s;
+}
+#panel-backdrop.open {
+  background: rgba(30,58,138,0.15);
+  pointer-events: auto;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) { .el-grid { grid-template-columns: repeat(2, 1fr); } #detail-panel { width: 100vw; right: -100vw; } }
+@media (max-width: 580px) { .el-grid { grid-template-columns: 1fr; } .elements-page { padding: 3rem 1.5rem 6rem; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+<a href="index.html" style="text-decoration: none;">
+  <span class="masthead-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" class="logo-icon">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" fill="currentColor" opacity="0.15"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <circle cx="6.5" cy="11.5" r="1.2" fill="currentColor"/>
+      <circle cx="9"   cy="7.5"  r="1.2" fill="currentColor"/>
+      <circle cx="13"  cy="6"    r="1.2" fill="currentColor"/>
+      <circle cx="16.5" cy="8.5" r="1.2" fill="currentColor"/>
+      <line x1="19" y1="4" x2="14" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M14 9 c-1 1-1.5 2-1 2.8 .8.5 1.8 0 2.8-1z" fill="currentColor"/>
+    </svg>
+    Reading Visual Arts
+  </span>
+</a>
+<nav>
+  <ul class="masthead-nav">
+    <li><a href="purposes.html">Purpose</a></li>
+    <li><a href="method.html">Study Art</a></li>
+    <li><a href="elements.html" class="active">Elements</a></li>
+    <li><a href="principles.html">Principle</a></li>
+    <li><a href="film.html">Film</a></li>
+  </ul>
+</nav>
+  <span class="masthead-issue">A Visual Arts Primer</span>
+</header>
+
+<main class="elements-page">
+
+  <div class="section-header-row">
+    <div>
+      <p class="section-kicker"></p>
+      <h1 class="section-title">Elements of <em>Art</em></h1>
+      <p class="section-sub">The fundamental visual components every artist uses to construct meaning. Click any card to explore each element in depth.</p>
+    </div>
+<a href="index.html" class="btn-back">← BACK TO HOME</a>
+
+  </div>
+
+  <div class="el-grid" id="elementsGrid">
+
+    <!-- LINE -->
+    <div class="el-card" data-element="line">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/line1.jpg" alt="Line 1">
+        <img class="card-slide"        src="image/line2.jpg" alt="Line 2">
+        <img class="card-slide"        src="image/line3.jpg" alt="Line 3">
+        <img class="card-slide"        src="image/line4.jpg" alt="Line 4">
+        <img class="card-slide"        src="image/line5.jpg" alt="Line 5">
+
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Line</div>
+        <div class="card-desc">The foundational path of a moving point that directs the viewer's eye across a composition.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>Direction</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12 C6 6,10 6,12 12 C14 18,18 18,21 12"/></svg>Path</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Boundary</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- SHAPE -->
+    <div class="el-card" data-element="shape">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/shapes1.jpg" alt="Shape 1">
+        <img class="card-slide"        src="image/shapes2.jpg" alt="Shape 2">
+        <img class="card-slide"        src="image/shapes3.jpg" alt="Shape 3">
+        <img class="card-slide"        src="image/shapes4.jpg" alt="Shape 4">
+        <img class="card-slide"        src="image/shapes5.jpg" alt="Shape 5">
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Shape</div>
+        <div class="card-desc">Two-dimensional, flat areas created when a line closes or sets boundaries around a defined space.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/></svg>2D</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="14" x2="21" y2="14"/></svg>Flat</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Area</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="el-card" data-element="form">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/form1.jpg" alt="Form 1">
+        <img class="card-slide"        src="image/form2.jpg" alt="Form 2">
+        <img class="card-slide"        src="image/form3.jpg" alt="Form 3">
+        <img class="card-slide"        src="image/form4.jpg" alt="Form 4">
+        <img class="card-slide"        src="image/form5.jpg" alt="Form 5">
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Form</div>
+        <div class="card-desc">Three-dimensional objects that take up physical volume or create the illusion of depth.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>3D</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Volume</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="20" x2="12" y2="4"/><line x1="4" y1="20" x2="20" y2="20"/></svg>Depth</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- SPACE -->
+    <div class="el-card" data-element="space">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/space1.jpg" alt="Space 1">
+        <img class="card-slide"        src="image/space2.jpg" alt="Space 2">
+        <img class="card-slide"        src="image/space3.jpg" alt="Space 3">
+        <img class="card-slide"        src="image/space4.jpg" alt="Space 4">
+        <img class="card-slide"        src="image/space5.jpg" alt="Space 5">
+
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Space</div>
+        <div class="card-desc">The depth, open margins, or area surrounding and separating objects within a work.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>Depth</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="21"/></svg>Negative</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="12" x2="3" y2="21"/><line x1="12" y1="12" x2="21" y2="21"/><line x1="12" y1="12" x2="12" y2="4"/></svg>Perspective</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- COLOR -->
+    <div class="el-card" data-element="color">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/color1.jpg" alt="Color 1">
+        <img class="card-slide"        src="image/color2.jpg" alt="Color 2">
+        <img class="card-slide"        src="image/color3.jpg" alt="Color 3">
+        <img class="card-slide"        src="image/color4.jpg" alt="Color 4">
+        <img class="card-slide"        src="image/color5.jpg" alt="Color 5">
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Color</div>
+        <div class="card-desc">Visual properties generated by light, defined through shifting hues, intensities, and values.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>Hue</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Intensity</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/></svg>Value</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- VALUE -->
+    <div class="el-card" data-element="value">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/value1.jpg" alt="Value 1">
+        <img class="card-slide"        src="image/value2.jpg" alt="Value 2">
+        <img class="card-slide"        src="image/value3.jpg" alt="Value 3">
+        <img class="card-slide"        src="image/value4.jpg" alt="Value 4">
+        <img class="card-slide"        src="image/value5.jpg" alt="Value 5">
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Value</div>
+        <div class="card-desc">The scale of lightness or darkness of a color, essential for creating contrast and mood.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/></svg>Lightness</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Darkness</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/></svg>Contrast</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+    <!-- TEXTURE -->
+    <div class="el-card" data-element="texture">
+      <div class="card-visual">
+        <img class="card-slide active" src="image/texture1.jpg" alt="Texture 1">
+        <img class="card-slide"        src="image/texture2.jpg" alt="Texture 2">
+        <img class="card-slide"        src="image/texture3.jpg" alt="Texture 3">
+        <img class="card-slide"        src="image/texture4.jpg" alt="Texture 4">
+        <img class="card-slide"        src="image/texture5.jpg" alt="Texture 5">
+        <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Texture</div>
+        <div class="card-desc">The perceived visual depth or actual surface tactile feel of a physical artwork.</div>
+        <div class="card-tags">
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>Surface</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v1M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8"/></svg>Tactile</span>
+          <span class="card-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Visual Feel</span>
+        </div>
+        <div class="card-footer"><span>GE ELEC 6</span> · Module</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div id="panel-backdrop"></div>
+
+<div id="detail-panel">
+  <button class="panel-close" id="panelClose" aria-label="Close panel">✕</button>
+  <div class="panel-image" id="panelImage">
+    <div class="panel-image-overlay"></div>
+    <div class="panel-image-glyph" id="panelGlyph"></div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-badges">
+      <span class="panel-badge">Element of Art</span>
+      <span class="panel-badge-module">GE ELEC 6 · Module</span>
+    </div>
+    <h2 class="panel-title" id="panelTitle"></h2>
+    <div class="panel-divider"></div>
+    <p class="panel-intro" id="panelIntro"></p>
+    <p class="panel-overview-label">Overview</p>
+    <p class="panel-overview" id="panelOverview"></p>
+    <p class="panel-features-label">Key Features</p>
+    <div class="panel-features" id="panelFeatures"></div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  line: {
+    glyph: 'L',
+    title: '<em>Line</em> Analysis',
+    intro: 'The foundational path of a moving point across a medium, acting as the primary building block for establishing direction and structure.',
+    overview: 'Line is the most basic element of art. It can vary in width, direction, curvature, and length. In visual analysis, lines do not just outline shapes; they guide the viewer\'s eye through the composition and convey distinct emotional and psychological characteristics based on their orientation and rhythm.',
+    features: [
+      { icon:'📐', title:'Structural Type',    desc:'Can be geometric (straight, rigid, mathematical) or organic (fluid, free-form, hand-drawn) to define boundaries.' },
+      { icon:'🧭', title:'Visual Direction',   desc:'Horizontal lines evoke calm and stability; vertical lines express height and strength; diagonal lines imply kinetic movement.' },
+      { icon:'👁️', title:'Implied Lines',      desc:'Not physically drawn lines, but directional paths created by a figure\'s gaze, pointing gestures, or alignment of shapes.' }
+    ]
+  },
+  shape: {
+    glyph: 'S',
+    title: '<em>Shape</em> Analysis',
+    intro: 'A two-dimensional, flat bounded area created when lines close or change direction to separate negative and positive space.',
+    overview: 'Shapes are strictly two-dimensional and are defined by clear edges or color contrasts. In visual media, layouts are structurally governed by how shapes are grouped, forming the basic visual grammar before depth or textures are introduced.',
+    features: [
+      { icon:'📐', title:'Geometric Shapes', desc:'Mathematical, precise forms such as circles, squares, and triangles that suggest order, artificial structures, or stability.' },
+      { icon:'🍃', title:'Organic Shapes',   desc:'Irregular, fluid, or biomorphic shapes mimicking natural forms like leaves, clouds, and living silhouettes that evoke spontaneity.' },
+      { icon:'🌓', title:'Space Definition', desc:'Shapes explicitly create positive space (the subject area) and shape the surrounding boundaries of negative space.' }
+    ]
+  },
+  form: {
+    glyph: 'F',
+    title: '<em>Form</em> Analysis',
+    intro: 'Three-dimensional objects that possess actual volume or strategically employ shading to create the structural illusion of depth.',
+    overview: 'Form extends shape into the third dimension by incorporating depth. While three-dimensional arts physically occupy space, two-dimensional media must rely heavily on illusionistic modeling to transform flat shapes into volumetric presence.',
+    features: [
+      { icon:'🧱', title:'Actual Form',    desc:'Physical, tactile, and touchable three-dimensional objects occupying space, such as sculpture, architecture, and installations.' },
+      { icon:'🖼️', title:'Implied Form',   desc:'The graphic illusion of 3D depth rendered realistically onto a completely flat 2D surface.' },
+      { icon:'💡', title:'Light & Shadow', desc:'The primary rendering tool that reveals form, utilizing highlights, mid-tones, core shadows, and cast shadows.' }
+    ]
+  },
+  space: {
+    glyph: 'Sp',
+    title: '<em>Space</em> Analysis',
+    intro: 'The physical or implied area around, between, and within elements, dictating perspective, depth, and layout density.',
+    overview: 'Space manages the relational distance between elements in a work. It keeps a layout readable and balanced. Artists manipulate space mathematically or atmospherically to stretch a flat image into a vast, deep world or a tightly packed, flat composition.',
+    features: [
+      { icon:'🌌', title:'Positive & Negative',       desc:'Positive space is the active area occupied by the main subject; negative space is the empty, background area surrounding it.' },
+      { icon:'📏', title:'Linear Perspective',        desc:'A mathematical system using converging lines meeting at a vanishing point on the horizon line to construct infinite depth.' },
+      { icon:'🌫️', title:'Atmospheric Perspective',   desc:'Creating depth by making distant objects appear lighter, lower in contrast, and shifting toward cooler blue tones.' }
+    ]
+  },
+  color: {
+    glyph: 'C',
+    title: '<em>Color</em> Analysis',
+    intro: 'The visual property produced when light strikes an object and reflects back to the eye, carrying immense emotional weight.',
+    overview: 'Color is the most expressive and psychologically impactful element of art. It alters visual temperature and focus immediately. By combining different colors, creators establish harmony or intentional visual discordance within an artwork.',
+    features: [
+      { icon:'🎨', title:'Hue Identity',          desc:'The pure name of a color family corresponding directly to its position on the standard color wheel (e.g., Red, Blue).' },
+      { icon:'⚡', title:'Intensity / Saturation', desc:'The purity, brightness, or dullness of a color; highly intense colors pop forward, while dull tones recede.' },
+      { icon:'🌡️', title:'Color Temperature',     desc:'The division of the palette into warm tones (reds, yellows) that energize, and cool tones (blues, greens) that calm.' }
+    ]
+  },
+  value: {
+    glyph: 'V',
+    title: '<em>Value</em> Analysis',
+    intro: 'The relative scale of lightness or darkness of a color or tone independent of its pure hue.',
+    overview: 'Value is responsible for how we perceive light sources and structural weight. By placing extreme light values next to dark values, the artist establishes strong contrast, guides composition focus, and sets a dramatic or somber tone.',
+    features: [
+      { icon:'🌓', title:'Tonal Gradient',      desc:'The smooth, progressive transition steps spanning from absolute pure white down to solid dark black.' },
+      { icon:'💥', title:'Contrast Range',      desc:'High-contrast layouts produce dramatic, punchy impact, whereas low-contrast setups feel soft, hazy, or muted.' },
+      { icon:'🎭', title:'Chiaroscuro System',  desc:'The specific allocation of stark light and dark values to model shapes into round, convincing three-dimensional forms.' }
+    ]
+  },
+  texture: {
+    glyph: 'T',
+    title: '<em>Texture</em> Analysis',
+    intro: 'The actual physical surface touch or the implied visual rendering of how an object feels.',
+    overview: 'Texture stimulates our sense of touch through sight. It adds a sensory layer to compositions, keeping clean digital or flat canvas layouts from looking sterile by simulating real-world materials and physical presence.',
+    features: [
+      { icon:'🖐️', title:'Actual / Tactile Texture',  desc:'Surface qualities you can physically touch and feel, such as thick impasto oil paint ridges, coarse burlap, or smooth marble.' },
+      { icon:'👁️', title:'Implied / Visual Texture',  desc:'An optical illusion where rendering tricks the eyes into seeing a texture (e.g., fur, metal, wood grain) on a smooth surface.' },
+      { icon:'🛠️', title:'Material Extraction',       desc:'How chosen mediums interact with tools (e.g., palette knives, chiseled stone, canvas paper fiber) to influence surface detail.' }
+    ]
+  }
+};
+
+/* Spotlight border */
+document.querySelectorAll('.el-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--mx', '-999px');
+    card.style.setProperty('--my', '-999px');
+  });
+});
+
+/* Slideshow */
+const state = {};
+document.querySelectorAll('.el-card').forEach(c => { state[c.dataset.element] = { index:0, timer:null }; });
+
+function goTo(card, i, syncPanel) {
+  const k = card.dataset.element;
+  const slides = card.querySelectorAll('.card-slide');
+  const dots   = card.querySelectorAll('.card-dot');
+  const n = ((i % slides.length) + slides.length) % slides.length;
+  slides.forEach((s,j) => s.classList.toggle('active', j===n));
+  dots.forEach(  (d,j) => d.classList.toggle('active', j===n));
+  state[k].index = n;
+  if (syncPanel && openKey===k) updatePanelSlide(n);
+}
+
+function startSS(card) {
+  const k = card.dataset.element;
+  stopSS(card);
+  state[k].timer = setInterval(() => goTo(card, state[k].index+1, true), 2000);
+}
+function stopSS(card) {
+  const k = card.dataset.element;
+  if (state[k].timer) { clearInterval(state[k].timer); state[k].timer=null; }
+}
+
+/* Panel */
+const panel = document.getElementById('detail-panel');
+const backdrop = document.getElementById('panel-backdrop');
+let openKey = null, activeCard = null;
+
+function updatePanelSlide(i) {
+  panel.querySelectorAll('.panel-slide').forEach((s,j) => s.classList.toggle('active', j===i));
+}
+
+function openPanel(card) {
+  const k = card.dataset.element;
+  const d = DATA[k]; if (!d) return;
+  if (activeCard && activeCard!==card) stopSS(activeCard);
+  activeCard=card; openKey=k;
+
+  const pImg = document.getElementById('panelImage');
+  const ov   = pImg.querySelector('.panel-image-overlay');
+  pImg.querySelectorAll('.panel-slide').forEach(s=>s.remove());
+  const ci = state[k]?.index ?? 0;
+  card.querySelectorAll('.card-slide').forEach((s,i) => {
+    const img = document.createElement('img');
+    img.className = 'panel-slide' + (i===ci?' active':'');
+    img.src=s.src; img.alt=s.alt;
+    pImg.insertBefore(img, ov);
+  });
+
+  document.getElementById('panelGlyph').textContent = d.glyph;
+  document.getElementById('panelTitle').innerHTML   = d.title;
+  document.getElementById('panelIntro').textContent = d.intro;
+  document.getElementById('panelOverview').textContent = d.overview;
+  document.getElementById('panelFeatures').innerHTML = d.features.map(f=>`
+    <div class="panel-feature">
+      <span class="panel-feature-icon">${f.icon}</span>
+      <div><div class="panel-feature-title">${f.title}</div><div class="panel-feature-desc">${f.desc}</div></div>
+    </div>`).join('');
+
+  panel.classList.add('open');
+  backdrop.classList.add('open');
+  startSS(card);
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  backdrop.classList.remove('open');
+  if (activeCard) stopSS(activeCard);
+  openKey=null; activeCard=null;
+}
+
+document.querySelectorAll('.el-card').forEach(c => c.addEventListener('click', ()=>openPanel(c)));
+backdrop.addEventListener('click', closePanel);
+document.getElementById('panelClose').addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key==='Escape') closePanel(); });
+  document.querySelectorAll('.el-card').forEach(card => startSS(card));
+
+
+</script>
+</body>
+</html>

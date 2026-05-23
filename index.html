@@ -3,49 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GE- ELEC 6 Reading Visual Arts</title>
+<title>GE ELEC 6 — Reading Visual Arts</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; overflow: hidden; }
+body { height: 100%; overflow: hidden; background: var(--bg); }
+
+.editorial-hero {
+  width: 100vw;
+  height: calc(100vh - 58px);
+  display: flex;          
+  overflow: hidden;
+}
+
+.col-left {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ed-title-block {
+  height: 45%;
+  padding: 1rem 1rem 1rem 2.5rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;           
+  flex-shrink: 0;
+}
+
+.ed-accent {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1rem;
+}
+
+.ed-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+}
+
+.ed-title em {
+  font-style: italic;
+  color: var(--cobalt);
+  font-weight: 400;
+}
+
+.ed-img-bottom {
+  flex: 1;
+  padding: 0.8rem 1.5rem 2rem 2.5rem; 
+  overflow: hidden;
+}
+
+.ed-img-bottom .img-wrap,
+.ed-img-top .img-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ed-img-bottom .img-wrap img,
+.ed-img-top .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+.col-right {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ed-img-top {
+  height: 42%;
+  padding: 2rem 3rem 0.8rem 1rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ed-body-block {
+  flex: 1;
+  padding: 1.5rem 4rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ed-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);   
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.ed-subtitle em {
+  font-style: italic;
+  color: #5e8fdc;                            
+}
+
+.ed-subtitle strong {
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: #5e8fdc;                             
+}
+
+.ed-desc {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.85;
+  max-width: 44ch;
+  margin-bottom: 1.8rem;
+}
+.ed-body-block .hero-cta {
+  background: rgba(94, 143, 220, 1);    
+}
+
+.ed-body-block .hero-cta:hover {
+  background: #4a7abf;                  
+}
+
+/* placeholder */
+.img-ph {
+  width: 100%; height: 100%;
+  border-radius: 10px;
+  background: rgba(59,91,219,0.05);
+  border: 2px dashed rgba(59,91,219,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-ph span {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(59,91,219,0.28);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2;
+}
+</style>
 </head>
 <body>
 
-<!-- MASTHEAD -->
 <header class="masthead">
-  <span class="masthead-logo">Reading Visual Arts
-  </span>
+  <a href="index.html" style="text-decoration: none;">
+    <span class="masthead-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" class="logo-icon">
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" fill="currentColor" opacity="0.15"/>
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <circle cx="6.5" cy="11.5" r="1.2" fill="currentColor"/>
+        <circle cx="9"   cy="7.5"  r="1.2" fill="currentColor"/>
+        <circle cx="13"  cy="6"    r="1.2" fill="currentColor"/>
+        <circle cx="16.5" cy="8.5" r="1.2" fill="currentColor"/>
+        <line x1="19" y1="4" x2="14" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M14 9 c-1 1-1.5 2-1 2.8 .8.5 1.8 0 2.8-1z" fill="currentColor"/>
+      </svg>
+      Reading Visual Arts
+    </span>
+  </a>
   <nav>
     <ul class="masthead-nav">
-      <li><a href="purposes.html">purpose</a></li>
-      <li><a href="#method">Study Art</a></li>
-      <li><a href="#elements">Elements</a></li>
-      <li><a href="#principles">Principle</a></li>
-      <li><a href="#film">film</a></li>
+      <li><a href="purposes.html">Purpose</a></li>
+      <li><a href="method.html">Study Art</a></li>
+      <li><a href="elements.html">Elements</a></li>
+      <li><a href="principles.html">Principle</a></li>
+      <li><a href="film.html">Film</a></li>
     </ul>
   </nav>
   <span class="masthead-issue">A Visual Arts Primer</span>
 </header>
 
-<!-- HOME SECTION -->
-<section class="hero" id="home">
-  <div class="hero-text">
-    <p class="hero-kicker">The Art of Perception</p>
-    <h1 class="hero-title">Reading <em>Visual</em> Arts</h1>
-    <p class="hero-desc">
-      Reading visual art is the analytical process of interpreting images to understand their meaning, history, and impact. It is a dialogue between the viewer and the work, where the language consists of line, color, space, and intention rather than words.
-    </p>
-    <a href="purposes.html" class="hero-cta">
-      Explore Visual Arts
-      <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 5h18M14 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-artwork-wrapper">
-      <img src="image/web.jpg" alt="Visual Art" class="hero-artwork">
-    </div>
-  </div>
-</section>
+<section class="editorial-hero">
 
+  <!-- LEFT  -->
+  <div class="col-left">
+
+    <div class="ed-title-block">
+      <p class="ed-accent">GE ELEC 6 - Visual Arts</p>
+      <h1 class="ed-title">
+        <em>Don't just</em><br>
+        LOOK.<br>
+        READ THE<br>
+        ART.
+      </h1>
+    </div>
+
+    <div class="ed-img-bottom">
+      <div class="img-wrap">
+        <img src="image/web.jpg" alt="Art"
+          onerror="this.parentElement.outerHTML='<div class=img-ph><span>Image 1<br>(bottom left)</span></div>'">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-right">
+
+    <div class="ed-img-top">
+      <div class="img-wrap">
+        <img src="image/web2.jpg" alt="Art"
+          onerror="this.parentElement.outerHTML='<div class=img-ph><span>Image 2<br>(top right)</span></div>'">
+      </div>
+    </div>
+
+    <div class="ed-body-block">
+      <p class="ed-subtitle">
+        We Study <em>The Visual</em> world you've<br>
+        <strong>ALWAYS</strong> wanted to understand
+      </p>
+      <p class="ed-desc">
+        Visual arts are structured texts designed for deep communication. Step beyond surface appearances to isolate foundational components, evaluate the interpretive gap between creator intent and audience decoding, and trace how images actively shape culture, history, and identity.
+      </p>
+      <a href="purposes.html" class="hero-cta" style="align-self:flex-start;">
+        EXPLORE VISUAL ARTS
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M1 5h18M14 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+
+</section>
 </body>
 </html>
