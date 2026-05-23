@@ -661,6 +661,201 @@ function openPanel(card) {
 }
 
 function closePanel() {
+    </div>
+
+    <div class="el-card" data-element="harmony">
+      <div class="card-visual">
+        <img class="card-slide" src="image/harmony.jpg" alt="Harmony illustration">
+        <div class="card-visual-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Harmony</div>
+        <div class="card-desc">Harmony combines compatible elements to create a pleasing, unified visual effect.</div>
+        <div class="card-tags">
+          <span class="card-tag">Agreement</span>
+          <span class="card-tag">Balance</span>
+          <span class="card-tag">Cohesion</span>
+        </div>
+        <div class="card-footer"><span>Definition</span> · Art Principle</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="panel-backdrop"></div>
+
+<div id="detail-panel">
+  <button class="panel-close" id="panelClose" aria-label="Close panel">✕</button>
+  <div class="panel-image" id="panelImage">
+    <div class="panel-image-overlay"></div>
+    <div class="panel-image-glyph" id="panelGlyph"></div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-badges">
+      <span class="panel-badge">Art Principle</span>
+      <span class="panel-badge-module">GE ELEC 6 · Principle</span>
+    </div>
+    <h2 class="panel-title" id="panelTitle"></h2>
+    <div class="panel-divider"></div>
+    <p class="panel-intro" id="panelIntro"></p>
+    <p class="panel-overview-label">Overview</p>
+    <p class="panel-overview" id="panelOverview"></p>
+    <p class="panel-features-label">Key Features</p>
+    <div class="panel-features" id="panelFeatures"></div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  balance: {
+    glyph: 'B',
+    title: '<em>Balance</em> Principle',
+    intro: 'Balance creates visual stability by controlling the distribution of weight across a composition.',
+    overview: 'Balance can be symmetrical, asymmetrical, or radial. It helps viewers feel that the artwork is intentionally arranged rather than chaotic, and it can make compositions feel calm, dynamic, or centered depending on the approach.',
+    features: [
+      { icon:'⚖️', title:'Symmetrical', desc:'Elements are mirrored on either side of an axis to create formal stability.' },
+      { icon:'🔄', title:'Asymmetrical', desc:'Different visual weights are balanced through contrast, scale, and placement without mirroring.' },
+      { icon:'⭕', title:'Radial', desc:'Elements radiate from a central point to unify the composition around a central focus.' }
+    ]
+  },
+  contrast: {
+    glyph: 'C',
+    title: '<em>Contrast</em> Principle',
+    intro: 'Contrast draws attention by placing opposing elements next to each other.',
+    overview: 'Contrast can be created with light and dark, large and small, rough and smooth, or warm and cool. It makes important parts of the composition stand out and keeps the viewer engaged by preventing visual monotony.',
+    features: [
+      { icon:'🌓', title:'Value Contrast', desc:'Using light and dark tones to make key elements pop.' },
+      { icon:'🎨', title:'Color Contrast', desc:'Pairing different hues or saturations to highlight separation and interest.' },
+      { icon:'🧩', title:'Textural Contrast', desc:'Mixing smooth and rough surfaces to create tactile variety.' }
+    ]
+  },
+  emphasis: {
+    glyph: 'E',
+    title: '<em>Emphasis</em> Principle',
+    intro: 'Emphasis creates a focal point so the viewer knows where to look first.',
+    overview: 'By using scale, color, placement, or contrast, emphasis makes one area of the artwork appear most important. It helps communicate the main idea or message clearly within the composition.',
+    features: [
+      { icon:'🎯', title:'Focal Point', desc:'The strongest visual element that immediately draws the eye.' },
+      { icon:'📌', title:'Dominance', desc:'One element stands out as primary while others remain supportive.' },
+      { icon:'✨', title:'Isolation', desc:'Separating an element from its surroundings to make it more noticeable.' }
+    ]
+  },
+  movement: {
+    glyph: 'M',
+    title: '<em>Movement</em> Principle',
+    intro: 'Movement leads the viewer’s eye through the composition along a visual path.',
+    overview: 'Movement can be suggested by lines, shapes, repetition, or directional cues. It gives the artwork liveliness and helps the viewer experience the piece in a controlled sequence.',
+    features: [
+      { icon:'🧭', title:'Directional Lines', desc:'Paths guided by lines, edges, or shapes that point the eye toward a destination.' },
+      { icon:'💨', title:'Rhythmic Flow', desc:'Repeating elements that create a sense of motion across the surface.' },
+      { icon:'⏩', title:'Implied Action', desc:'Static forms arranged to suggest movement or progression.' }
+    ]
+  },
+  rhythm: {
+    glyph: 'R',
+    title: '<em>Rhythm</em> Principle',
+    intro: 'Rhythm uses repeated elements to generate a sense of organized motion.',
+    overview: 'When shapes, colors, or textures repeat at regular or varied intervals, rhythm gives the composition momentum and familiarity. It can feel gentle, driving, or unpredictable depending on the pattern.',
+    features: [
+      { icon:'🎼', title:'Regular Rhythm', desc:'Evenly spaced repetitions that create a steady, predictable flow.' },
+      { icon:'🧵', title:'Alternating Rhythm', desc:'Different elements repeat in a fixed variation to keep things lively.' },
+      { icon:'🌊', title:'Progressive Rhythm', desc:'Repetitions that change gradually, leading the eye along a visual gradient.' }
+    ]
+  },
+  unity: {
+    glyph: 'U',
+    title: '<em>Unity</em> Principle',
+    intro: 'Unity makes all parts of an artwork feel connected and complete.',
+    overview: 'Unity is achieved when the elements and principles work together harmoniously. It prevents the artwork from feeling fragmented and helps the viewer understand the composition as a cohesive whole.',
+    features: [
+      { icon:'🧩', title:'Visual Consistency', desc:'Colors, shapes, or textures repeat in a way that ties the design together.' },
+      { icon:'🤝', title:'Thematic Unity', desc:'A shared idea or mood that runs through every part of the artwork.' },
+      { icon:'🔗', title:'Spatial Harmony', desc:'Balanced relationships between elements that keep the whole composition stable.' }
+    ]
+  },
+  variety: {
+    glyph: 'V',
+    title: '<em>Variety</em> Principle',
+    intro: 'Variety introduces differences to make the artwork visually interesting.',
+    overview: 'Variety prevents boredom by combining diverse forms, colors, textures, and ideas. It adds vitality and helps the viewer explore different parts of the composition.',
+    features: [
+      { icon:'🎨', title:'Diverse Elements', desc:'Mixing different shapes, colors, and textures for interest.' },
+      { icon:'⚡', title:'Unexpected Pairings', desc:'Combining unlike elements to create visual surprise.' },
+      { icon:'🌀', title:'Contrast within Unity', desc:'Using variety while still keeping the piece coherent.' }
+    ]
+  },
+  proportion: {
+    glyph: 'P',
+    title: '<em>Proportion</em> Principle',
+    intro: 'Proportion compares the relative size of elements to establish scale and relationships.',
+    overview: 'Proper proportion makes objects feel correctly sized and connected. It can create realism, exaggeration, or emphasis depending on whether the relationships are natural or intentionally distorted.',
+    features: [
+      { icon:'📏', title:'Human Scale', desc:'Using familiar size relationships to keep figures and objects believable.' },
+      { icon:'🔍', title:'Relative Size', desc:'Changing sizes to show importance or depth.' },
+      { icon:'📐', title:'Balanced Ratios', desc:'Keeping proportions harmonious by comparing each part to the whole.' }
+    ]
+  },
+  harmony: {
+    glyph: 'H',
+    title: '<em>Harmony</em> Principle',
+    intro: 'Harmony blends compatible elements to create a pleasing visual whole.',
+    overview: 'Harmony is achieved when the artwork feels smooth and easy to read. It often uses similar colors, repeated shapes, or unified textures so that the composition feels calm and balanced.',
+    features: [
+      { icon:'🎵', title:'Color Harmony', desc:'Using colors that work well together to create a peaceful mood.' },
+      { icon:'✨', title:'Formal Harmony', desc:'Repeating shapes or patterns in a balanced way.' },
+      { icon:'🧘', title:'Compositional Ease', desc:'Arranging elements so the eye moves naturally and comfortably.' }
+    ]
+  }
+};
+
+const panel = document.getElementById('detail-panel');
+const backdrop = document.getElementById('panel-backdrop');
+let openKey = null, activeCard = null;
+
+document.querySelectorAll('.el-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--mx', '-999px');
+    card.style.setProperty('--my', '-999px');
+  });
+  card.addEventListener('click', () => openPanel(card));
+});
+
+function openPanel(card) {
+  const k = card.dataset.element;
+  const d = DATA[k];
+  if (!d) return;
+  activeCard = card;
+
+  const pImg = document.getElementById('panelImage');
+  const ov = pImg.querySelector('.panel-image-overlay');
+  pImg.querySelectorAll('.panel-slide').forEach(s => s.remove());
+
+  const img = document.createElement('img');
+  img.className = 'panel-slide active';
+  img.src = card.querySelector('.card-slide').src;
+  img.alt = card.querySelector('.card-slide').alt;
+  pImg.insertBefore(img, ov);
+
+  document.getElementById('panelGlyph').textContent = d.glyph;
+  document.getElementById('panelTitle').innerHTML = d.title;
+  document.getElementById('panelIntro').textContent = d.intro;
+  document.getElementById('panelOverview').textContent = d.overview;
+  document.getElementById('panelFeatures').innerHTML = d.features.map(f => `
+    <div class="panel-feature">
+      <span class="panel-feature-icon">${f.icon}</span>
+      <div><div class="panel-feature-title">${f.title}</div><div class="panel-feature-desc">${f.desc}</div></div>
+    </div>`).join('');
+
+  panel.classList.add('open');
+  backdrop.classList.add('open');
+}
+
+function closePanel() {
   panel.classList.remove('open');
   backdrop.classList.remove('open');
 }
@@ -668,6 +863,51 @@ function closePanel() {
 backdrop.addEventListener('click', closePanel);
 document.getElementById('panelClose').addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
+
+<!-- ═══ SIMPLE FOOTER ═══ -->
+<footer class="simple-footer">
+  <div class="footer-quote-section">
+    <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+    <span class="footer-author">— Henry Ward Beecher</span>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom-row">
+    <div class="footer-left">
+      <a href="index.html" class="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+        </svg>
+        Reading Visual Arts
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="purposes.html">Purpose</a>
+      <a href="elements.html">Elements</a>
+      <a href="principles.html">Principles</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 GE ELEC 6 &bull; Reading Visual Arts
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll-to-top Button -->
+<button class="footer-scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 300);
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>

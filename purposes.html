@@ -89,5 +89,50 @@
     });
   });
 </script>
+
+<!-- ═══ SIMPLE FOOTER ═══ -->
+<footer class="simple-footer">
+  <div class="footer-quote-section">
+    <p class="footer-quote">"Every artist dips his brush in his own soul, and paints his own nature into his pictures."</p>
+    <span class="footer-author">— Henry Ward Beecher</span>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom-row">
+    <div class="footer-left">
+      <a href="index.html" class="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 1.1 0 2-.9 2-2 0-.53-.2-1-.53-1.37-.32-.36-.51-.84-.51-1.35 0-1.1.9-2 2-2h2.35C19.66 15.28 22 12.85 22 10c0-4.42-4.48-8-10-8z"/>
+        </svg>
+        Reading Visual Arts
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="purposes.html">Purpose</a>
+      <a href="elements.html">Elements</a>
+      <a href="principles.html">Principles</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 GE ELEC 6 &bull; Reading Visual Arts
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll-to-top Button -->
+<button class="footer-scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 300);
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 </body>
 </html>
